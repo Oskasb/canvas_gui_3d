@@ -35,20 +35,22 @@ define([
 		};
 
 		CanvasGuiState.prototype.enableDebugGui = function() {
-			var pieceConfigUpdated = function(confs) {
+			var configUpdated = function(confs) {
 				this.attachMainConfig(confs);
 			}.bind(this);
 
-			ConfigCache.subscribeToCategoryKey('main_gui_states', "debug_state", pieceConfigUpdated);
+			ConfigCache.subscribeToCategoryKey('main_gui_states', "debug_state", configUpdated);
 		};
 
 
 
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
 			var updateTmpData = function(data) {
-				console.log("Template updated:", templateId, data)
-				this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.canvasCalls, data);
-				templateActive(templateId)
+				if (this.activeTemplates[templateId]) {
+					console.log("Template updated:", templateId, data)
+					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.canvasCalls, data);
+					templateActive(templateId)
+				}
 			}.bind(this);
 			console.log("Request template: ", templateId)
 			ConfigCache.subscribeToCategoryKey('template', templateId, updateTmpData);
@@ -62,6 +64,7 @@ define([
 			}.bind(this);
 
 			for (var i = 0; i < config.templates.length; i++) {
+				this.activeTemplates[config.templates[i]] = {};
 				this.attachGuiTemplate(config.templates[i], templateActive);
 			}
 
@@ -80,7 +83,12 @@ define([
 			ConfigCache.setMasterRestFunction(masterReset)
 		};
 
+		CanvasGuiState.prototype.clearCurrentGui = function() {
+			this.activeTemplates = {};
+		};
+
 		CanvasGuiState.prototype.loadMainState = function(state) {
+			this.clearCurrentGui();
 
 			var mainConfigUpdated = function(confs) {
 				console.log("Main conf updated:", confs);

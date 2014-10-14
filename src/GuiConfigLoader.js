@@ -25,7 +25,7 @@ define([
 
 		GuiConfigLoader.prototype.loadConfigDataFile = function(url, ok, fail, updateCallback) {
 			var success = function(srcUrl, data) {
-				console.log(data)
+				console.log("Gui Data Updated:", data)
 				for (var i = 0; i < data.length; i++) {
 					for (var index in data[i]) {
 						ConfigCache.dataCombineToKey(index, srcUrl, data[i]);
