@@ -3,12 +3,14 @@
 define([
 	'gui/GuiConfigLoader',
 	'gui/CanvasGuiState',
-	'gui/CanvasCalls'
+	'gui/CanvasCalls',
+	'gui/GuiBusSends'
 ],
 	function(
 		GuiConfigLoader,
 		CanvasGuiState,
-		CanvasCalls
+		CanvasCalls,
+		GuiBusSends
 		) {
 
 

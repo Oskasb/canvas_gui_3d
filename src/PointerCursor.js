@@ -12,8 +12,7 @@ define([
 		GameUtil
 		) {
 
-		var PointerCursor = function(parentDiv) {
-			this.parentDiv = parentDiv;
+		var PointerCursor = function() {
 			this.vectorColor = [0.3, 0.9, 0.8, 1];
 			this.x = 0;
 			this.y = 0;
