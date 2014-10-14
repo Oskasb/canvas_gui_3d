@@ -130,9 +130,9 @@ define([
 			if (textSource.callback) {
 				target.text.callback = textCallback(DrawCallbacks.getGuiDrawCallback(textSource.callback));
 			} else if (textSource.channel) {
-				target.text.callback = textCallback(DrawCallbacks.fetchChannelData(textSource.channel));
+				target.text.callback = textCallback(DrawCallbacks.getGuiDrawCallback("fetchChannelData")(textSource.channel));
 			} else {
-				target.text.label = DrawCallbacks.fetchGuiText(textSource.key);
+				target.text.label = DrawCallbacks.getGuiDrawCallback('fetchGuiText')(textSource.key);
 			}
 		};
 
@@ -163,8 +163,8 @@ define([
 			for (var index in messages.channels) {
 				target.messageChannels[messages.channels[index]] = 'on_message';
 				target.messageData = messages;
-				target.renderData.text.callbacks.push(textCallback(DrawCallbacks.fetchChannelData(messages.channels[index])));
-				DrawCallbacks.registerMessageElement(target, messages.channels[index], target.messageChannels[messages.channels[index]]);
+				target.renderData.text.callbacks.push(textCallback(DrawCallbacks.getGuiDrawCallback("fetchChannelData")(messages.channels[index])));
+				DrawCallbacks.getGuiDrawCallback("registerMessageElement")(target, messages.channels[index], target.messageChannels[messages.channels[index]]);
 			}
 		};
 

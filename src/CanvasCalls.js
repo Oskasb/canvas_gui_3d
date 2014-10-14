@@ -4,19 +4,20 @@ define([
 	"gui/CanvasGui3D",
 	'gui/layout/LayoutEnums',
 	'gui/layout/ElementLayout',
-	'gui/functions/GameUiCallbacks',
+	'gui/functions/UiCallbacks',
 	'gui/elements/UiParent'
 ],
 	function(
 		CanvasGui3d,
 		LayoutEnums,
 		ElementLayout,
-		GameUiCallbacks,
+		UiCallbacks,
 		UiParent
 		) {
 
-		var CanvasCalls = function(camera, resolution) {
+		var CanvasCalls = function(camera, resolution, uiCallbacks) {
 			this.callsToCanvas = 0;
+			this.registerUiCallbacks(uiCallbacks)
 			this.uiParent = new UiParent(this);
 			this.canvasGui3d = new CanvasGui3d(camera, resolution);
 			this.aspect = this.canvasGui3d.aspect;
@@ -71,6 +72,9 @@ define([
 			return 'rgb('+Math.floor(color[0]*255)+','+Math.floor(color[1]*255)+','+Math.floor(color[2]*255)+')';
 		};
 
+		CanvasCalls.prototype.registerUiCallbacks = function(callbackMap) {
+			UiCallbacks.addDrawCallbacks(callbackMap)
+		};
 
 		CanvasCalls.prototype.toRgba = function(color) {
 			var r = ""+Math.floor(color[0]*255);
@@ -284,7 +288,7 @@ define([
 		CanvasCalls.prototype.updateCanvasCalls = function(tpf) {
 
 			this.canvasGui3d.updateCanvasGui();
-			GameUiCallbacks.processCallbacks(tpf);
+			UiCallbacks.getCallById('processCallbacks')(tpf);
 			this.attenuateGui();
 			this.drawDepthLayers();
 		};

@@ -15,8 +15,9 @@ define([
 		var uiResolution = 1024;
 		var useDebugGui = true;
 
-		var CanvasGuiMain = function(camera) {
-			this.canvasCalls = new CanvasCalls(camera, uiResolution);
+		var CanvasGuiMain = function(camera, callbackMap) {
+			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
+
 			this.canvasGuiState = new CanvasGuiState(this.canvasCalls);
 
 			var reset = function() {
@@ -27,8 +28,8 @@ define([
 			this.setupEventListener();
 		};
 
-		CanvasGuiMain.prototype.tickGuiMain = function(time) {
-			this.canvasGuiState.update(time)
+		CanvasGuiMain.prototype.addUiCallbacks = function(callbackMap) {
+			this.canvasCalls.registerUiCallbacks(callbackMap);
 		};
 
 		CanvasGuiMain.prototype.setupEventListener = function() {
@@ -43,6 +44,10 @@ define([
 			this.canvasGuiState.loadMainState('state_flight');
 
 			event.registerListener(event.list().SET_PLAYER_CONTROLLED_ENTITY, handleSetControlledEntity);
+		};
+
+		CanvasGuiMain.prototype.tickGuiMain = function(time) {
+			this.canvasGuiState.update(time)
 		};
 
 		return CanvasGuiMain;

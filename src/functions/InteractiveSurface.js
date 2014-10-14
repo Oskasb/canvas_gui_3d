@@ -2,11 +2,11 @@
 
 define([
 	'io/PointerInputHandler',
-	'gui/functions/GameUiCallbacks'
+	'gui/functions/UiCallbacks'
 ],
 	function(
 		PointerInputHandler,
-		GameUiCallbacks
+		UiCallbacks
 		) {
 
 		var InteractiveSurface = function(canvasGuiLayer, onStateChange, layerKeys) {
@@ -43,7 +43,7 @@ define([
 		};
 
 		InteractiveSurface.prototype.setupApplyCallback = function(callId, params) {
-			var gameCall = GameUiCallbacks.fetchCallById(callId);
+			var gameCall = UiCallbacks.getCallById(callId);
 			var callback = function() {
 				gameCall(params);
 			};
@@ -92,7 +92,7 @@ define([
 
 
 
-			var gameCall = GameUiCallbacks.fetchCallById(callId);
+			var gameCall = UiCallbacks.getCallById(callId);
 			var callback = function(inputParams) {
 				gameCall(inputParams);
 			};
@@ -141,7 +141,7 @@ define([
 
 		InteractiveSurface.prototype.beginValueManipulation = function() {
 			for (var i = 0; i < this.onDragCallbacks.length; i++) {
-				this.onDragCallbacks[i].startDrag[this.onDragCallbacks[i].params.axis] = GameUiCallbacks.fetchControlState(this.onDragCallbacks[i].params.control);
+				this.onDragCallbacks[i].startDrag[this.onDragCallbacks[i].params.axis] = UiCallbacks.getCallById('fetchControlState')(this.onDragCallbacks[i].params.control);
 			}
 			this.onControlActive();
 		};
