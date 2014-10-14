@@ -2,21 +2,20 @@
 
 define([
 	'goo/entities/SystemBus',
-	'io/PointerInputHandler',
+
 	'gui/CanvasGuiWidget',
 	'gui/CanvasGuiImages',
 	'data_pipeline/data/ConfigCache',
-	'gui/GuiWidgetComposer',
+
 	'data_pipeline/GameDataPipeline'
 
 ],
 	function(
 		SystemBus,
-		PointerInputHandler,
+
 		CanvasGuiWidget,
 		CanvasGuiImages,
 		ConfigCache,
-		GuiWidgetComposer,
 		GameDataPipeline
 		) {
 
@@ -29,8 +28,6 @@ define([
 			this.pointerX = 50;
 			this.pointerY = 50;
 			this.canvasCalls = canvasCalls;
-			this.pointerInputHandler = new PointerInputHandler();
-			this.guiWidgetComposer = new GuiWidgetComposer();
 			this.registerListeners();
 			this.builtTemplates = {};
 			this.activeTemplates = {};
@@ -45,17 +42,7 @@ define([
 			ConfigCache.subscribeToCategoryKey('main_gui_states', "debug_state", pieceConfigUpdated);
 		};
 
-		CanvasGuiState.prototype.applyPlayerPiece = function(playerPiece) {
-			this.pointerInputHandler.setPlayerGamePiece(playerPiece);
-		//	this.guiWidgetComposer.composeGuiWidgets(playerPiece, playerPiece.pieceData.onScreenInput);
-			this.pointerInputHandler.applyGuiWidgets(this.guiWidgetComposer);
 
-			var pieceConfigUpdated = function(confs) {
-				this.attachMainConfig(confs);
-			}.bind(this);
-
-			ConfigCache.subscribeToCategoryKey('main_gui_states', playerPiece.pieceData.onScreenInput.guiMainStateId, pieceConfigUpdated);
-		};
 
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
 			var updateTmpData = function(data) {
@@ -192,7 +179,7 @@ define([
 
 		CanvasGuiState.prototype.update = function(tpf) {
 
-			this.pointerInputHandler.tickInput(tpf);
+
 			for (var key in this.activeTemplates) {
 				this.activeTemplates[key].updateGuiSystem(tpf);
 			}

@@ -13,7 +13,7 @@ define([
 
 
 		var uiResolution = 1024;
-		var useDebugGui = true;
+
 
 		var CanvasGuiMain = function(camera, callbackMap) {
 			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
@@ -25,25 +25,15 @@ define([
 			}.bind(this);
 
 			this.canvasCalls.registerResetCallback(reset);
-			this.setupEventListener();
 		};
 
-		CanvasGuiMain.prototype.addUiCallbacks = function(callbackMap) {
-			this.canvasCalls.registerUiCallbacks(callbackMap);
+		CanvasGuiMain.prototype.setMainUiState = function(state) {
+			this.canvasGuiState.loadMainState(state);
 		};
 
-		CanvasGuiMain.prototype.setupEventListener = function() {
+		CanvasGuiMain.prototype.addUiSubstateConfig = function(config) {
+			this.canvasGuiState.attachMainConfig(config);
 
-			var handleSetControlledEntity = function(e) {
-				this.canvasGuiState.applyPlayerPiece(event.eventArgs(e).entity);
-				if (useDebugGui) {
-					this.canvasGuiState.enableDebugGui();
-				}
-			}.bind(this);
-
-			this.canvasGuiState.loadMainState('state_flight');
-
-			event.registerListener(event.list().SET_PLAYER_CONTROLLED_ENTITY, handleSetControlledEntity);
 		};
 
 		CanvasGuiMain.prototype.tickGuiMain = function(time) {
