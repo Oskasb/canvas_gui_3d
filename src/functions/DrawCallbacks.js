@@ -1,9 +1,9 @@
 "use strict";
 
 define([
-	'io/canvas/functions/GameUiCallbacks',
-	'io/canvas/functions/DrawFunctionShapes',
-	'io/data/ConfigCache'
+	'gui/functions/GameUiCallbacks',
+	'gui/functions/DrawFunctionShapes',
+	'data_pipeline/data/ConfigCache'
 
 ],
 	function(

@@ -4,8 +4,8 @@ define([
 	'application/PerfMon',
 	'application/EventManager',
 	'goo/entities/SystemBus',
-	'io/data/ConfigCache',
-	'io/pipeline/DataPipelineMessageHandler'
+	'data_pipeline/data/ConfigCache',
+	'data_pipeline/DataPipelineMessageHandler'
 ],
 	function(
 		PerfMon,

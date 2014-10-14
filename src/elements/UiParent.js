@@ -1,7 +1,7 @@
 "use strict";
 
 define([
-	'io/canvas/elements/CanvasGuiLayer'
+	'gui/elements/CanvasGuiLayer'
 ],
 	function(
 		CanvasGuiLayer

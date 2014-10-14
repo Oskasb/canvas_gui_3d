@@ -3,11 +3,11 @@
 define([
 	'goo/entities/SystemBus',
 	'io/PointerInputHandler',
-	'io/canvas/CanvasGuiWidget',
-	'io/canvas/CanvasGuiImages',
-	'io/data/ConfigCache',
-	'io/canvas/GuiWidgetComposer',
-	'io/pipeline/GameDataPipeline'
+	'gui/CanvasGuiWidget',
+	'gui/CanvasGuiImages',
+	'data_pipeline/data/ConfigCache',
+	'gui/GuiWidgetComposer',
+	'data_pipeline/GameDataPipeline'
 
 ],
 	function(

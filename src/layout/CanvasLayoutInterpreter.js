@@ -1,11 +1,11 @@
 "use strict";
 
 define([
-	'io/canvas/layout/LayoutEnums',
-	'io/canvas/layout/CanvasBoxLayout',
-	'io/canvas/layout/ImageLayouter',
-	'io/canvas/functions/DrawCallbacks',
-	'io/data/ConfigCache'
+	'gui/layout/LayoutEnums',
+	'gui/layout/CanvasBoxLayout',
+	'gui/layout/ImageLayouter',
+	'gui/functions/DrawCallbacks',
+	'data_pipeline/data/ConfigCache'
 
 ],
 	function(

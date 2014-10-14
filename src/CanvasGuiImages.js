@@ -1,8 +1,8 @@
 "use strict";
 
 define([
-		'io/pipeline/GameDataPipeline',
-		'io/data/ConfigCache'
+		'data_pipeline/GameDataPipeline',
+		'data_pipeline/data/ConfigCache'
 	],
 	function(
 		GameDataPipeline,

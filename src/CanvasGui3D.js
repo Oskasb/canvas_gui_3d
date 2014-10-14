@@ -7,7 +7,7 @@ define([
 	'goo/shapes/Quad',
 	'goo/renderer/shaders/ShaderLib',
 	'goo/renderer/pass/FullscreenUtil',
-	'io/data/ConfigCache'
+	'data_pipeline/data/ConfigCache'
 
 ],
 	function(

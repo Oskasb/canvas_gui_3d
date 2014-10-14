@@ -1,8 +1,8 @@
 "use strict";
 
 define([
-	'io/canvas/functions/DrawCallbacks',
-	'io/data/ConfigCache'
+	'gui/functions/DrawCallbacks',
+	'data_pipeline/data/ConfigCache'
 ],
 	function(
 		DrawCallbacks,

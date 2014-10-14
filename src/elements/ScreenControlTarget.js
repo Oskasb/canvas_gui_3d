@@ -4,7 +4,7 @@ define([
 	'goo/entities/SystemBus',
 	'application/EventManager',
 	'io/GameScreen',
-	'io/canvas/GuiBusSends'
+	'gui/GuiBusSends'
 ],
 	function(
 		SystemBus,

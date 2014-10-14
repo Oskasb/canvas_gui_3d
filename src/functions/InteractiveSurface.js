@@ -2,7 +2,7 @@
 
 define([
 	'io/PointerInputHandler',
-	'io/canvas/functions/GameUiCallbacks'
+	'gui/functions/GameUiCallbacks'
 ],
 	function(
 		PointerInputHandler,

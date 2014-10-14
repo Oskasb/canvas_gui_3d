@@ -1,8 +1,8 @@
 "use strict";
 
 define([
-	'io/canvas/layout/LayoutEnums',
-	'io/data/ConfigCache'
+	'gui/layout/LayoutEnums',
+	'data_pipeline/data/ConfigCache'
 ],
 	function(
 		LayoutEnums,

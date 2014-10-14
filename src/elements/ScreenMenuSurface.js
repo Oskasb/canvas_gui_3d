@@ -3,7 +3,7 @@
 define([
 	"game/GameConfiguration",
 	'application/EventManager',
-	'io/canvas/MenuButton'
+	'gui/MenuButton'
 ],
 	function(
 		gameConfig,

@@ -1,7 +1,7 @@
 "use strict";
 
 define([
-	'io/canvas/layout/GuiConstants'
+	'gui/layout/GuiConstants'
 ],
 	function(
 		GuiConstants

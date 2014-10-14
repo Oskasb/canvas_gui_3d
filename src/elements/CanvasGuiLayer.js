@@ -2,10 +2,10 @@
 
 define([
 	'goo/entities/SystemBus',
-	'io/canvas/layout/CanvasLayoutInterpreter',
-	'io/canvas/layout/ElementLayout',
-	'io/canvas/functions/InteractiveSurface',
-	'io/canvas/layout/GuiConstants'
+	'gui/layout/CanvasLayoutInterpreter',
+	'gui/layout/ElementLayout',
+	'gui/functions/InteractiveSurface',
+	'gui/layout/GuiConstants'
 
 ],
 	function(

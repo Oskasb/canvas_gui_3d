@@ -2,8 +2,8 @@
 
 define([
 	'application/EventManager',
-	'io/canvas/CanvasGuiState',
-	'io/canvas/CanvasCalls'
+	'gui/CanvasGuiState',
+	'gui/CanvasCalls'
 ],
 	function(
 		event,

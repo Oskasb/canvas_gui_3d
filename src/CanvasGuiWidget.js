@@ -1,9 +1,9 @@
 "use strict";
 
 define([
-	'io/canvas/elements/CanvasGuiLayer',
-	'io/canvas/layout/GuiConstants',
-	'io/data/ConfigCache'
+	'gui/elements/CanvasGuiLayer',
+	'gui/layout/GuiConstants',
+	'data_pipeline/data/ConfigCache'
 ],
 	function(
 		CanvasGuiLayer,

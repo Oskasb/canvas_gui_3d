@@ -1,8 +1,8 @@
 "use strict";
 
 define([
-	'io/canvas/layout/GuiConstants',
-	'io/data/ConfigCache'
+	'gui/layout/GuiConstants',
+	'data_pipeline/data/ConfigCache'
 ],
 	function(
 		GuiConstants,

@@ -1,9 +1,9 @@
 "use strict";
 
 define([
-	'io/canvas/elements/ScreenControlTarget',
-	'io/canvas/elements/ScreenSelectionSurface',
-	'io/canvas/elements/ScreenMenuSurface'
+	'gui/elements/ScreenControlTarget',
+	'gui/elements/ScreenSelectionSurface',
+	'gui/elements/ScreenMenuSurface'
 ],
 	function(
 		ScreenControlTarget,

@@ -1,11 +1,11 @@
 "use strict";
 
 define([
-	"io/canvas/CanvasGui3D",
-	'io/canvas/layout/LayoutEnums',
-	'io/canvas/layout/ElementLayout',
-	'io/canvas/functions/GameUiCallbacks',
-	'io/canvas/elements/UiParent'
+	"gui/CanvasGui3D",
+	'gui/layout/LayoutEnums',
+	'gui/layout/ElementLayout',
+	'gui/functions/GameUiCallbacks',
+	'gui/elements/UiParent'
 ],
 	function(
 		CanvasGui3d,
