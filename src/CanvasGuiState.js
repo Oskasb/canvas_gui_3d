@@ -34,6 +34,7 @@ define([
 			this.idLayers = {};
 		};
 
+		/*
 		CanvasGuiState.prototype.enableDebugGui = function() {
 			var configUpdated = function(confs) {
 				this.attachMainConfig(confs);
@@ -41,7 +42,7 @@ define([
 
 			ConfigCache.subscribeToCategoryKey('main_gui_states', "debug_state", configUpdated);
 		};
-
+        */
 
 
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
@@ -87,9 +88,15 @@ define([
 			this.activeTemplates = {};
 		};
 
+
+
+
 		CanvasGuiState.prototype.loadMainState = function(state) {
 			this.clearCurrentGui();
+			this.attachMainStateId(state);
+		};
 
+		CanvasGuiState.prototype.attachMainStateId = function(state) {
 			var mainConfigUpdated = function(confs) {
 				console.log("Main conf updated:", confs);
 				this.attachMainConfig(confs);
