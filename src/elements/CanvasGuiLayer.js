@@ -25,8 +25,8 @@ define([
 			on_applied:'on_applied'
 		};
 
-		var CanvasGuiLayer = function(layerKeys, parent, canvasCalls, data) {
-
+		var CanvasGuiLayer = function(layerKeys, parent, cursor, canvasCalls, data) {
+			this.pointerCursor = cursor;
 			if (parent) {
 				this.parentLayout = parent.renderStates.passive;
 				this.zIndex = parent.zIndex;
@@ -173,8 +173,7 @@ define([
 			this.combineDataForState(this.guiStateKeys.on_hover, this.cookData(data).on_hover, addStateData);
 
 			this.addLayerState(this.guiStateKeys.on_hover, addStateData);
-
-			this.interactiveSurface.enableInteraction();
+			this.pointerCursor.registerInteractiveLayer(this);
 		};
 
 

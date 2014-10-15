@@ -1,11 +1,9 @@
 "use strict";
 
 define([
-	'io/PointerInputHandler',
 	'gui/functions/UiCallbacks'
 ],
 	function(
-		PointerInputHandler,
 		UiCallbacks
 		) {
 
@@ -109,10 +107,6 @@ define([
 			} else {
 				this.setupDragCallback(calls.call, calls.params);
 			}
-		};
-
-		InteractiveSurface.prototype.enableInteraction = function() {
-			PointerInputHandler.registerGuiLayer(this.canvasGuiLayer);
 		};
 
 		InteractiveSurface.prototype.propagateStateChange = function(state) {

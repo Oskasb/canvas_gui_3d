@@ -13,6 +13,7 @@ define([
 		) {
 
 		var PointerCursor = function() {
+			this.interactiveLayers = {};
 			this.vectorColor = [0.3, 0.9, 0.8, 1];
 			this.x = 0;
 			this.y = 0;
@@ -148,7 +149,9 @@ define([
 			this.showDragToPoint(toX, toY, distance , Math.atan2(fromX - toX, toY - fromY) );
 		};
 
-
+		PointerCursor.prototype.registerInteractiveLayer = function(canvasGuiLayer) {
+			this.interactiveLayers[canvasGuiLayer.id] = canvasGuiLayer;
+		};
 
 		return PointerCursor;
 	});

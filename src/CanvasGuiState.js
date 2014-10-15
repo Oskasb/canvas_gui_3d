@@ -22,9 +22,9 @@ define([
 
 
 
-		var CanvasGuiState = function(canvasCalls, dataLoaderOptions) {
+		var CanvasGuiState = function(canvasCalls, cursor) {
 			this.uiParent = canvasCalls.uiParent;
-			this.dataLoaderOptions = dataLoaderOptions;
+			this.pointerCursor = cursor;
 			this.pointerX = 50;
 			this.pointerY = 50;
 			this.canvasCalls = canvasCalls;
@@ -49,7 +49,7 @@ define([
 			var updateTmpData = function(data) {
 				if (this.activeTemplates[templateId]) {
 					console.log("Template updated:", templateId, data)
-					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.canvasCalls, data);
+					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.pointerCursor, this.canvasCalls, data);
 					templateActive(templateId)
 				}
 			}.bind(this);

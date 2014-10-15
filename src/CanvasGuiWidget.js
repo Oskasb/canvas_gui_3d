@@ -11,7 +11,8 @@ define([
 		ConfigCache
 		) {
 
-		var CanvasGuiWidget = function(id, parent, canvasCalls, data) {
+		var CanvasGuiWidget = function(id, parent, cursor, canvasCalls, data) {
+			this.pointerCursor = cursor;
 			this.id = id;
 			this.parent = parent;
 			this.canvasCalls = canvasCalls;
@@ -51,7 +52,7 @@ define([
 
 
 
-			var newLayer = new CanvasGuiLayer(layer, parent, this.canvasCalls, data);
+			var newLayer = new CanvasGuiLayer(layer, parent, this.pointerCursor, this.canvasCalls, data);
 
 			// injects new layers into the layers array to be added in next loop
 			if (layer.feedback_gadgets) {

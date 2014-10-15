@@ -4,17 +4,20 @@ define([
 	'gui/GuiConfigLoader',
 	'gui/CanvasGuiState',
 	'gui/CanvasCalls',
-	'gui/GuiBusSends'
+	'gui/GuiBusSends',
+	'gui/PointerCursor'
 ],
 	function(
 		GuiConfigLoader,
 		CanvasGuiState,
 		CanvasCalls,
-		GuiBusSends
+		GuiBusSends,
+		PointerCursor
 		) {
 
 
 		var CanvasGuiMain = function() {
+			this.pointerCursor = new PointerCursor();
 			this.guiConfigLoader = new GuiConfigLoader();
 		};
 
@@ -24,7 +27,7 @@ define([
 
 		CanvasGuiMain.prototype.initGuiMain = function(camera, callbackMap, uiResolution) {
 			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
-			this.canvasGuiState = new CanvasGuiState(this.canvasCalls);
+			this.canvasGuiState = new CanvasGuiState(this.canvasCalls, this.pointerCursor);
 			var reset = function() {
 				this.canvasGuiState.rebuildGuiLayers();
 			}.bind(this);

@@ -9,7 +9,7 @@ define([
 
 
 		var UiParent = function(canvasCalls) {
-			this.layer = new CanvasGuiLayer({"shape":"canvas_parent"}, null, canvasCalls)
+			this.layer = new CanvasGuiLayer({"shape":"canvas_parent"}, null, null, canvasCalls, null)
 
 		};
 
