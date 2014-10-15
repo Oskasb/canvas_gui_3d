@@ -2,7 +2,7 @@
 
 define([
 	'goo/entities/SystemBus',
-	'io/GameScreen',
+	'gui/GameScreen',
 	"game/GameUtil"
 
 ],
