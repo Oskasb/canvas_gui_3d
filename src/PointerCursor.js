@@ -2,14 +2,12 @@
 
 define([
 	'goo/entities/SystemBus',
-	'gui/GameScreen',
-	"game/GameUtil"
+	'gui/GameScreen'
 
 ],
 	function(
 		SystemBus,
-		GameScreen,
-		GameUtil
+		GameScreen
 		) {
 
 		var PointerCursor = function() {
@@ -139,8 +137,12 @@ define([
 		};
 
 
+		PointerCursor.prototype.lineDistance = function(fromX, fromY, toX, toY) {
+			return Math.sqrt((fromX - toX)*(fromX - toX) + (fromY - toY)*(fromY - toY));
+		};
+
 		PointerCursor.prototype.inputVector = function(fromX, fromY, toX, toY) {
-			var distance = 0.008*this.pxXtoPercentX(GameUtil.lineDistance(fromX, fromY, toX, toY));
+			var distance = 0.008*this.pxXtoPercentX(this.lineDistance(fromX, fromY, toX, toY));
 			this.vectorColor[0]=0.5+distance*0.5;
 			this.vectorColor[1]=1-distance*0.5;
 			this.vectorColor[2]=1-distance*0.5;
