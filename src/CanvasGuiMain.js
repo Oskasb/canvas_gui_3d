@@ -5,14 +5,16 @@ define([
 	'gui/CanvasGuiState',
 	'gui/CanvasCalls',
 	'gui/GuiBusSends',
-	'gui/PointerCursor'
+	'gui/PointerCursor',
+	'gui/GameScreen'
 ],
 	function(
 		GuiConfigLoader,
 		CanvasGuiState,
 		CanvasCalls,
 		GuiBusSends,
-		PointerCursor
+		PointerCursor,
+		GameScreen
 		) {
 
 
@@ -26,6 +28,8 @@ define([
 		};
 
 		CanvasGuiMain.prototype.initGuiMain = function(camera, callbackMap, uiResolution) {
+			console.log("Ini main: ", camera)
+			GameScreen.registerAppContainer(document.body);
 			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
 			this.canvasGuiState = new CanvasGuiState(this.canvasCalls, this.pointerCursor);
 			var reset = function() {
