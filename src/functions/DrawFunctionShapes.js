@@ -17,16 +17,36 @@ define([],
 			return 'rgba('+r+', '+g+', '+b+', '+a+')';
 		};
 
-		DrawFunctionShapes.drawGraphArray = function(graphArray, ctx, element, topValue) {
+		DrawFunctionShapes.drawGraphArray = function(graphArray, ctx, element, topValue, playerEntity) {
 			var pos = element.pos.final;
 			var size = element.size;
 
 			ctx.strokeStyle = toRgba(element.callbackData.color);
-			ctx.lineWidth = element.callbackData.line_width;
+			ctx.lineWidth = 1;
+
+			var curveCount = 0;
+			for (var index in graphArray) {
+				curveCount += 1;
+			}
+
+			var wingsByCurveMap = {};
+			if (playerEntity.wings) {
+				for (var index in playerEntity.wings) {
+					var curveId = playerEntity.wings[index].sourceData.liftCurveId;
+					if (!wingsByCurveMap[curveId]) {
+						wingsByCurveMap[curveId] = [];
+					}
+					wingsByCurveMap[curveId].push(playerEntity.wings[index]);
+				}
+			}
+
 
 
 			ctx.beginPath();
 			ctx.strokeStyle = toRgba([0.2, 0.5, 0.6, 1]);
+
+
+
 
 			DrawFunctionShapes.startGraph(ctx, pos.left + (size.width*0.5), pos.top);
 			DrawFunctionShapes.addPointToGraph(ctx, pos.left + (size.width*0.5), pos.top+size.height);
@@ -37,6 +57,7 @@ define([],
 			var graphCount = 0;
 
 			for (var index in graphArray) {
+
 				graphCount += 1;
 
 				var graphName = index;
@@ -49,27 +70,27 @@ define([],
 				var startT = pos.top + (valuesXY[0][1] * 25)+(size.height/5)*graphCount;
 
 				ctx.beginPath();
-				ctx.strokeStyle = toRgba([0.2, 0.5, 0.6, 1]);
+				ctx.strokeStyle = toRgba([0.2, 0.5, 0.6, 0.6]);
 				DrawFunctionShapes.startGraph(ctx, pos.left , startT);
 				DrawFunctionShapes.addPointToGraph(ctx, pos.left + (size.width), startT);
 				ctx.stroke();
 
+				var color = toRgba([0.7+(Math.sin(1*graphCount))*0.3, 0.7+(Math.cos(2*graphCount))*0.3, 0.7+(Math.sin(2*graphCount)*0.3), 0.4]);
 
-				var color = toRgba([0.7+(Math.sin(1*graphCount))*0.3, 0.7+(Math.cos(2*graphCount))*0.3, 0.7+(Math.sin(2*graphCount)*0.3), 1]);
-
-				ctx.font = "20px Russo One"
-				ctx.textAlign = "right"
+				ctx.font = "16px Russo One"
+				ctx.textAlign = "start"
 				ctx.fillStyle = color
 				ctx.fillText(
 					graphName,
-					pos.left - 5,
-					startT
+					pos.left + 5,
+					startT-5
 				);
 
 				ctx.strokeStyle = color
 				ctx.beginPath();
-
+				ctx.lineWidth = 1;
 				DrawFunctionShapes.startGraph(ctx, startL, startT);
+
 
 				for (var i = 0; i < valuesXY.length; i++) {
 
@@ -80,11 +101,63 @@ define([],
 
 				}
 				ctx.stroke();
+
+
+				if (wingsByCurveMap[graphName]) {
+					var wingCount = wingsByCurveMap[graphName].length
+
+					for (var i = 0; i < wingCount; i++) {
+						var wing = wingsByCurveMap[graphName][i];
+
+						left = pos.left + (size.width * 0.5);
+
+						left += (wing.angleOfAttack * (size.width/(2*Math.PI)));
+
+						var fontSize = 10;
+
+						var offsetH = -2*fontSize -wingCount - (i)*fontSize*0.7;
+
+						ctx.font = fontSize+"px Russo One"
+						ctx.textAlign = "center"
+						ctx.fillStyle = toRgba([0.7+(Math.sin(1*graphCount))*0.3, 0.7+(Math.cos(2*graphCount))*0.3, 0.7+(Math.sin(2*graphCount)*0.3), 0.4]);
+
+						ctx.fillText(
+							wing.wingId,
+							left,
+							startT+offsetH+(fontSize*1)
+						);
+
+
+
+
+						ctx.lineWidth = 1;
+						DrawFunctionShapes.startGraph(ctx, left, startT+offsetH+(fontSize*1.2));
+						DrawFunctionShapes.addPointToGraph(ctx, left, startT);
+						//	ctx.stroke();
+
+						var yawMod = (wing.angleOfAttackYaw * (size.height*0.5));
+
+						//	ctx.lineWidth = 3;
+						DrawFunctionShapes.startGraph(ctx, left, startT);
+						DrawFunctionShapes.addPointToGraph(ctx, left-40, startT+yawMod);
+						//	ctx.stroke();
+
+						var dragMod = -(wing.force.data[2] * 1);
+
+						DrawFunctionShapes.startGraph(ctx, left, startT);
+						DrawFunctionShapes.addPointToGraph(ctx, left+dragMod, startT+dragMod);
+						//	ctx.stroke();
+
+
+						var liftMod = -(wing.force.data[1] * 0.1);
+
+						DrawFunctionShapes.startGraph(ctx, left, startT);
+						DrawFunctionShapes.addPointToGraph(ctx, left-liftMod, startT+liftMod);
+						ctx.stroke();
+
+					}
+				}
 			}
-
-
-
-
 		};
 
 		DrawFunctionShapes.startGraph = function(ctx, left, top) {

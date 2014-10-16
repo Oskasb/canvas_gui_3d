@@ -37,7 +37,8 @@ define([
 					break;
 				case "aerodynamic_curves":
 					return function(ctx, element) {
-						DrawFunctionShapes.drawGraphArray(UiCallbacks.getCallById('fetchAerodynamicCurves')(), ctx, element, element.callbackData.top_value)
+
+						DrawFunctionShapes.drawGraphArray(UiCallbacks.getCallById('fetchAerodynamicCurves')(), ctx, element, element.callbackData.top_value, UiCallbacks.getCallById('fetchPlayerPiece')())
 					};
 					break;
 				case "player_control_update":
