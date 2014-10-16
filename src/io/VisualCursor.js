@@ -14,21 +14,29 @@ define([
 			this.x = 0;
 			this.y = 0;
 			this.vectorColor = [0.3, 0.9, 0.8, 1];
+			this.renderPointer = {
+				pointer:{
+					x:0,
+					y:0,
+					hidden:false
+				}
+			}
 		};
 
 		VisualCursor.prototype.pxXtoPercentX = function(x) {
-			var width = GameScreen.getWidth();
-			return 100*x/width
+			return 100*x/GameScreen.getWidth()
 		};
 
 		VisualCursor.prototype.pxYtoPercentY = function(y) {
-			var height = GameScreen.getHeight();
-			return 100*y/height;
+			return 100*y/GameScreen.getHeight();
 		};
 
 
 		VisualCursor.prototype.moveTo = function(x, y, hoverCount) {
-			SystemBus.emit('pointerGuiState', {pointer:{x:this.pxXtoPercentX(x), y:this.pxYtoPercentY(y), hidden:hoverCount}});
+			this.renderPointer.pointer.x = this.pxXtoPercentX(x);
+			this.renderPointer.pointer.y = this.pxYtoPercentY(y);
+			this.renderPointer.pointer.hidden = hoverCount;
+			SystemBus.emit('pointerGuiState', this.renderPointer);
 		};
 
 		VisualCursor.prototype.transformConnector = function(x1, y1, x2, y2, distance) {
