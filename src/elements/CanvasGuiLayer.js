@@ -89,8 +89,13 @@ define([
 		};
 
 
-		CanvasGuiLayer.prototype.drawCanvasLayer = function() {
+		CanvasGuiLayer.prototype.drawCanvasLayer = function(tpf, mouseState) {
 			if (this.state == this.guiStateKeys.hidden) return;
+
+			if (this.renderStates[this.guiStateKeys.on_hover]){
+				this.interactiveSurface.updateSurface(tpf, mouseState)
+			}
+
 			SystemBus.emit('guiFlash', {renderData:this.renderStates[this.state].renderData, zIndex:this.zIndex});
 		};
 

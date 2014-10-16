@@ -57,8 +57,11 @@ define([
 		};
 
 		CanvasGuiMain.prototype.tickGuiMain = function(tpf) {
+			this.inputState.initFrameSample();
+			this.canvasGuiState.updateGuySystems(tpf, this.inputState);
 			this.inputState.updateInputState(tpf, this.pointerCursor);
-			this.canvasGuiState.update(tpf)
+			this.canvasGuiState.drawLayers(tpf)
+
 		};
 
 		return CanvasGuiMain;

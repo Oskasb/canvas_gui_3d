@@ -137,7 +137,6 @@ define([
 			for (var i = 0; i < this.onDragCallbacks.length; i++) {
 				this.onDragCallbacks[i].startDrag[this.onDragCallbacks[i].params.axis] = UiCallbacks.getCallById('fetchControlState')(this.onDragCallbacks[i].params.control);
 			}
-			this.onControlActive();
 		};
 
 
@@ -171,14 +170,19 @@ define([
 			this.surfaceStateCheck('on_hover')
 		};
 
-		InteractiveSurface.prototype.checkHoverHit = function(xf, yf, hits) {
+		InteractiveSurface.prototype.updateSurface = function(tpf, mouseState) {
 			if (this.canvasGuiLayer.state == this.canvasGuiLayer.guiStateKeys.hidden) return;
 
 			this.data = this.renderStates[this.canvasGuiLayer.state].renderData.data;
-			if (xf > this.data.xMin && xf < this.data.xMax && yf > this.data.yMin && yf < this.data.yMax) {
-				hits.push(this);
+			if (mouseState.visualXY.x > this.data.xMin
+				&& mouseState.visualXY.x < this.data.xMax
+				&& mouseState.visualXY.y > this.data.yMin
+				&& mouseState.visualXY.y < this.data.yMax) {
+				mouseState.interactionTargets.push(this);
 			} else {
-				if (this.canvasGuiLayer.state == 'on_hover') this.surfaceStateCheck('passive');
+				if (this.canvasGuiLayer.state == 'on_hover' || this.canvasGuiLayer.state == 'on_active') {
+					this.surfaceStateCheck('passive');
+				}
 			}
 		};
 

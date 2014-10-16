@@ -39,6 +39,9 @@ define([
 			return this.pointerCursor;
 		};
 
+		CanvasGuiAPI.prototype.getPointerState = function() {
+			return this.pointerCursor.getPointerState();
+		};
 
 		return CanvasGuiAPI;
 

@@ -63,8 +63,8 @@ define([
 			SystemBus.emit('guiFlash', {
 				renderData:{
 					arc:{
-						x:100*x/width,
-						y:100*y/height,
+						x:this.renderPointer.pointer.x,
+						y:this.renderPointer.pointer.y,
 						radius:8+12*(distance),
 						start:-Math.PI*0.5+angle+(Math.PI*distance),
 						end:-Math.PI*0.5+angle-(Math.PI*distance),

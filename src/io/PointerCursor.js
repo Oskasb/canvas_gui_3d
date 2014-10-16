@@ -33,5 +33,10 @@ define([
 			this.interactiveLayers[canvasGuiLayer.id] = canvasGuiLayer;
 		};
 
+		PointerCursor.prototype.getPointerState = function() {
+			return this.inputState.mouseState;
+		};
+
+
 		return PointerCursor;
 	});

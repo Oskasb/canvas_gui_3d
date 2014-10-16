@@ -190,14 +190,15 @@ define([
 			this.canvasCalls.drawToCanvasGui(args);
 		};
 
-		CanvasGuiState.prototype.update = function(tpf) {
-
-
+		CanvasGuiState.prototype.updateGuySystems = function(tpf, inputState) {
 			for (var key in this.activeTemplates) {
-				this.activeTemplates[key].updateGuiSystem(tpf);
+				this.activeTemplates[key].updateGuiSystem(tpf, inputState.mouseState);
 			}
-			GameDataPipeline.tickDataLoader(tpf);
+		};
+
+		CanvasGuiState.prototype.drawLayers = function(tpf) {
 			this.canvasCalls.updateCanvasCalls(tpf);
+			GameDataPipeline.tickDataLoader(tpf);
 		};
 
 		return CanvasGuiState

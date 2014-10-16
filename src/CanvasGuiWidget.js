@@ -133,12 +133,12 @@ define([
 		};
 
 
-		CanvasGuiWidget.prototype.updateGuiSystem = function() {
+		CanvasGuiWidget.prototype.updateGuiSystem = function(tpf, mouseState) {
 
 			if (this.templateHidden) return;
 
 			for (var i = 0; i < this.layers.length; i++) {
-				this.layers[i].drawCanvasLayer();
+				this.layers[i].drawCanvasLayer(tpf, mouseState);
 			}
 		};
 
