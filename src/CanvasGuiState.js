@@ -2,11 +2,9 @@
 
 define([
 	'goo/entities/SystemBus',
-
 	'gui/CanvasGuiWidget',
-	'gui/CanvasGuiImages',
 	'data_pipeline/data/ConfigCache',
-
+	'data_pipeline/PipelineAPI',
 	'data_pipeline/GameDataPipeline'
 
 ],
@@ -14,8 +12,8 @@ define([
 		SystemBus,
 
 		CanvasGuiWidget,
-		CanvasGuiImages,
 		ConfigCache,
+		PipelineAPI,
 		GameDataPipeline
 		) {
 
@@ -54,7 +52,7 @@ define([
 				}
 			}.bind(this);
 			console.log("Request template: ", templateId)
-			ConfigCache.subscribeToCategoryKey('template', templateId, updateTmpData);
+			PipelineAPI.subscribeToCategoryKey('template', templateId, updateTmpData);
 		};
 
 
@@ -102,14 +100,14 @@ define([
 				this.attachMainConfig(confs);
 			}.bind(this);
 
-			ConfigCache.subscribeToCategoryKey('main_gui_states', state, mainConfigUpdated);
+			PipelineAPI.subscribeToCategoryKey('main_gui_states', state, mainConfigUpdated);
 
 			var masterReset = function() {
 				ConfigCache.fireCategoryCallbacks('shapes')
 			};
 
-			ConfigCache.registerCategoryUpdatedCallback('layout_key_maps', masterReset);
-			ConfigCache.registerCategoryUpdatedCallback('layout_constants', masterReset);
+			PipelineAPI.subscribeToCategoryUpdate('layout_key_maps', masterReset);
+			PipelineAPI.subscribeToCategoryUpdate('layout_constants', masterReset);
 
 		};
 

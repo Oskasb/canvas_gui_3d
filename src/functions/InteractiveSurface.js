@@ -141,11 +141,10 @@ define([
 		};
 
 
-		InteractiveSurface.prototype.onControlActive = function() {
-
-			if (this.canvasGuiLayer.state != 'on_active') {
-				this.propagateStateChange('on_active');
-			}
+		InteractiveSurface.prototype.onControlActive = function(targetArray) {
+			if (this.canvasGuiLayer.state == 'on_enabled') return;
+			targetArray.push(this);
+			this.propagateStateChange('on_active');
 		};
 
 

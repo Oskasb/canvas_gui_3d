@@ -7,7 +7,7 @@ define([
 	'goo/shapes/Quad',
 	'goo/renderer/shaders/ShaderLib',
 	'goo/renderer/pass/FullscreenUtil',
-	'data_pipeline/data/ConfigCache'
+	'data_pipeline/PipelineAPI'
 
 ],
 	function(
@@ -17,7 +17,7 @@ define([
 		Quad,
 		ShaderLib,
 		FullscreenUtil,
-		ConfigCache
+		PipelineAPI
 		) {
 
 	    var CanvasGui3D = function(camera, resolution) {
@@ -42,11 +42,12 @@ define([
 
 			this.onUpdateCallbacks = [];
 
-			var configUpdated = function() {
-				this.handleConfigUpdate();
+			var configUpdated = function(config) {
+				this.handleConfigUpdate(config);
 			}.bind(this);
 
-			ConfigCache.registerCategoryUpdatedCallback('setup', configUpdated)
+		   PipelineAPI.subscribeToCategoryKey('setup', 'page', configUpdated);
+
 
 		};
 
@@ -159,8 +160,8 @@ define([
 		};
 
 
-		CanvasGui3D.prototype.handleConfigUpdate = function() {
-			var config = ConfigCache.getConfigKey('setup', 'page');
+		CanvasGui3D.prototype.handleConfigUpdate = function(config) {
+
 			var select = config.blending.default;
 
 			var opts = config.blending.modes[select];

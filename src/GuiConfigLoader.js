@@ -1,7 +1,7 @@
 "use strict";
 
 define([
-	'gui/CanvasGuiImages',
+	'data_pipeline/data/CanvasGuiImages',
 	'data_pipeline/data/ConfigCache'
 
 ],

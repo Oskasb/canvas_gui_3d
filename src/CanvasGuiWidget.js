@@ -3,12 +3,12 @@
 define([
 	'gui/elements/CanvasGuiLayer',
 	'gui/layout/GuiConstants',
-	'data_pipeline/data/ConfigCache'
+	'data_pipeline/PipelineAPI'
 ],
 	function(
 		CanvasGuiLayer,
 		GuiConstants,
-		ConfigCache
+		PipelineAPI
 		) {
 
 		var CanvasGuiWidget = function(id, parent, cursor, canvasCalls, data) {
@@ -48,7 +48,7 @@ define([
 
 		CanvasGuiWidget.prototype.addLayer = function(layer, parent, data) {
 
-			if (! data) data = ConfigCache.getConfigKey('shapes', layer.shape);
+			if (! data) data = PipelineAPI.readCachedConfigKey('shapes', layer.shape);
 
 
 
@@ -72,7 +72,7 @@ define([
 			var layerGadgets = layer.feedback_gadgets;
 			for (var i = 0; i < layerGadgets.length; i++) {
 
-				var config = ConfigCache.getConfigKey('gadgets', layerGadgets[i].gadget);
+				var config = PipelineAPI.readCachedConfigKey('gadgets', layerGadgets[i].gadget);
 
 				var params = layerGadgets[i].params;
 
@@ -80,7 +80,7 @@ define([
 
 					for (var key in config[j]) {
 						// clone it so reusing the same dosnt overwrite the dynamic parameters..
-						var shape = JSON.parse(JSON.stringify(ConfigCache.getConfigKey('shapes', config[j][key])));
+						var shape = JSON.parse(JSON.stringify(PipelineAPI.readCachedConfigKey('shapes', config[j][key])));
 
 						GuiConstants.applyLayoutRules(shape);
 						GuiConstants.applyConstantValues(shape);
@@ -94,7 +94,7 @@ define([
 						var newShape = {};
 						newShape[shapeKey] = shape;
 
-						ConfigCache.getCategory('shapes')[shapeKey] = shape;
+						PipelineAPI.getCachedConfigs()['shapes'][shapeKey] = shape;
 
 						this.addLayer({shape:shapeKey}, parent, JSON.parse(JSON.stringify(shape)));
 					}
