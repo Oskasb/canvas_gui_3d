@@ -5,6 +5,7 @@ define([
 	'gui/CanvasGuiState',
 	'gui/CanvasCalls',
 	'gui/GuiBusSends',
+	'gui/io/InputState',
 	'gui/io/PointerCursor',
 	'gui/io/GameScreen'
 ],
@@ -13,13 +14,16 @@ define([
 		CanvasGuiState,
 		CanvasCalls,
 		GuiBusSends,
+		InputState,
 		PointerCursor,
 		GameScreen
 		) {
 
 
 		var CanvasGuiMain = function() {
-			this.pointerCursor = new PointerCursor();
+			GameScreen.registerAppContainer(document.body);
+			this.inputState = new InputState();
+			this.pointerCursor = new PointerCursor(this.inputState);
 			this.guiConfigLoader = new GuiConfigLoader();
 		};
 
@@ -28,15 +32,12 @@ define([
 		};
 
 		CanvasGuiMain.prototype.initGuiMain = function(camera, callbackMap, uiResolution) {
-			console.log("Ini main: ", camera)
-			GameScreen.registerAppContainer(document.body);
 			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
 			this.canvasGuiState = new CanvasGuiState(this.canvasCalls, this.pointerCursor);
 			var reset = function() {
 				this.canvasGuiState.rebuildGuiLayers();
 			}.bind(this);
 			this.canvasCalls.registerResetCallback(reset);
-
 		};
 
 
@@ -55,8 +56,9 @@ define([
 
 		};
 
-		CanvasGuiMain.prototype.tickGuiMain = function(time) {
-			this.canvasGuiState.update(time)
+		CanvasGuiMain.prototype.tickGuiMain = function(tpf) {
+			this.inputState.updateInputState(tpf, this.pointerCursor);
+			this.canvasGuiState.update(tpf)
 		};
 
 		return CanvasGuiMain;

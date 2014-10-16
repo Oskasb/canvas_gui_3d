@@ -11,8 +11,8 @@ define([
 		) {
 
 		var VisualCursor = function() {
-			this.x = x;
-			this.y = y;
+			this.x = 0;
+			this.y = 0;
 			this.vectorColor = [0.3, 0.9, 0.8, 1];
 		};
 
@@ -24,6 +24,11 @@ define([
 		VisualCursor.prototype.pxYtoPercentY = function(y) {
 			var height = GameScreen.getHeight();
 			return 100*y/height;
+		};
+
+
+		VisualCursor.prototype.moveTo = function(x, y, hoverCount) {
+			SystemBus.emit('pointerGuiState', {pointer:{x:this.pxXtoPercentX(x), y:this.pxYtoPercentY(y), hidden:hoverCount}});
 		};
 
 		VisualCursor.prototype.transformConnector = function(x1, y1, x2, y2, distance) {

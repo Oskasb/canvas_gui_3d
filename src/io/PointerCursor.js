@@ -7,7 +7,8 @@ define([
 	    VisualCursor
 		) {
 
-		var PointerCursor = function() {
+		var PointerCursor = function(inputState) {
+			this.inputState = inputState;
 			this.visualCursor = new VisualCursor();
 			this.interactiveLayers = {};
 
