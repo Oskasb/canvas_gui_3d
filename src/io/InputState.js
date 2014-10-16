@@ -21,7 +21,7 @@ define([
 		    };
 		    this.elementListeners = new ElementListeners(this.mouseState);
 		    this.interactionTargets = [];
-		    this.buttonDownTarget = null;
+		    this.buttonDownTargets = [];
 	    };
 
 
@@ -33,9 +33,21 @@ define([
 			if (this.mouseState.action[0] + this.mouseState.action[1]) {
 				pointerCursor.inputMouseAction(this.mouseState.action);
 				this.mouseButtonEmployed();
+			} else {
+				if (this.buttonDownTargets.length) {
+					this.handleReleaseTargets();
+				}
 			}
 
 		};
+
+		InputState.prototype.handleReleaseTargets = function() {
+
+			for (var i = 0 ; i < this.buttonDownTargets.length; i++) {
+				this.buttonDownTargets[i].triggerOnApply();
+			}
+		};
+
 
 		InputState.prototype.mouseButtonEmployed = function() {
 
@@ -46,9 +58,9 @@ define([
 
 		InputState.prototype.handleLeftButtonPress = function() {
 			this.mouseState.lastAction[0] = this.mouseState.action[0];
-
+			this.buttonDownTargets.length = 0;
 			for (var i = 0; i < this.interactionTargets.length; i++) {
-				this.interactionTargets[i].onControlActive();
+				this.interactionTargets[i].onControlActive(this.buttonDownTargets);
 			}
 
 		};
