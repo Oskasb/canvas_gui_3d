@@ -37,6 +37,7 @@ define([
 			this.renderPointer.pointer.y = this.pxYtoPercentY(y);
 			this.renderPointer.pointer.hidden = hoverCount;
 			SystemBus.emit('pointerGuiState', this.renderPointer);
+			return this.renderPointer.pointer;
 		};
 
 		VisualCursor.prototype.transformConnector = function(x1, y1, x2, y2, distance) {
