@@ -5,8 +5,8 @@ define([
 	'gui/CanvasGuiState',
 	'gui/CanvasCalls',
 	'gui/GuiBusSends',
-	'gui/PointerCursor',
-	'gui/GameScreen'
+	'gui/io/PointerCursor',
+	'gui/io/GameScreen'
 ],
 	function(
 		GuiConfigLoader,
