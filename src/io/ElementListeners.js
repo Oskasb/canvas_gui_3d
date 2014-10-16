@@ -2,11 +2,13 @@
 
 define([
 	'gui/io/GameScreen',
+	'gui/io/MouseActionListener',
 	'goo/entities/SystemBus'
 
 ],
 	function(
 		GameScreen,
+		MouseActionListener,
 		SystemBus
 		) {
 
@@ -18,14 +20,14 @@ define([
 		var wheelDelta;
 
 		var ElementListeners = function() {
+			this.mouseActionListener = new MouseActionListener();
 			this.setupMouseListener();
-
 		};
 
 
 
 		ElementListeners.prototype.setupMouseListener = function() {
-
+			this.mouseActionListener.setupElementClickListener(GameScreen.getElement());
 			GameScreen.getElement().addEventListener('mousemove', function(e) {
 				e.stopPropagation();
 				x = (e.clientX);
@@ -55,14 +57,17 @@ define([
 
 
 		ElementListeners.prototype.sampleMouseState = function(mouseStore) {
+			this.mouseActionListener.sampleMouseAction(mouseStore);
 			mouseStore.x = x;
 			mouseStore.y = y;
 			mouseStore.dx = dx;
 			mouseStore.dy = dy;
 			mouseStore.wheelDelta = wheelDelta;
+
 			wheelDelta = 0;
 			dx = 0;
 			dy = 0;
+
 		};
 
 

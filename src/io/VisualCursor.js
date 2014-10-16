@@ -115,15 +115,12 @@ define([
 			});
 		};
 
-		VisualCursor.prototype.showPressPoint = function(state, x, y) {
-			var width = GameScreen.getWidth();
-			var height = GameScreen.getHeight();
-
+		VisualCursor.prototype.showPressPoint = function(state) {
 			SystemBus.emit('guiFlash', {
 				renderData:{
 					arc:{
-						x:100*x/width,
-						y:100*y/height,
+						x:this.renderPointer.pointer.x,
+						y:this.renderPointer.pointer.y,
 						radius:5+4*state,
 						start:2*Math.PI,
 						end:0,
@@ -134,11 +131,12 @@ define([
 			});
 		};
 
-		VisualCursor.prototype.visualizeMouseAction = function(action, xy) {
+		VisualCursor.prototype.visualizeMouseAction = function(action) {
 			//	console.log("mouse:", action, xy);
 			this.vectorColor[0]=0.5+action[0]*0.5;
 			this.vectorColor[1]=0.5+action[1]*0.5;
-			this.showPressPoint(action[0]+action[1], xy[0], xy[1]);
+
+			this.showPressPoint(action[0]+action[1]);
 
 		};
 

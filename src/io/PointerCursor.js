@@ -22,14 +22,14 @@ define([
 			this.visualCursor.moveTo(x, y);
 		};
 
-		VisualCursor.prototype.inputVector = function(fromX, fromY, toX, toY) {
-			VisualCursor.visualizeVector(fromX, fromY, toX, toY);
+		PointerCursor.prototype.inputVector = function(fromX, fromY, toX, toY) {
+			this.visualCursor.visualizeVector(fromX, fromY, toX, toY);
 		};
 
 
-		PointerCursor.prototype.inputMouseAction = function(action, xy) {
+		PointerCursor.prototype.inputMouseAction = function(action) {
 			//	console.log("mouse:", action, xy);
-			VisualCursor.visualizeMouseAction(action, xy);
+			this.visualCursor.visualizeMouseAction(action);
 		};
 
 		PointerCursor.prototype.registerInteractiveLayer = function(canvasGuiLayer) {
