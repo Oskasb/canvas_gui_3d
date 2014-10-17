@@ -41,6 +41,12 @@ define([
 						DrawFunctionShapes.drawGraphArray(UiCallbacks.getCallById('fetchAerodynamicCurves')(), ctx, element, element.callbackData.top_value, UiCallbacks.getCallById('fetchPlayerPiece')())
 					};
 					break;
+				case "radar_overview":
+					return function(ctx, element) {
+
+						DrawFunctionShapes.drawRadarContent(UiCallbacks.getCallById('fetchActiveGamePieces')(), ctx, element, UiCallbacks.getCallById('fetchPlayerPiece')())
+					};
+					break;
 				case "player_control_update":
 					return function(ctx, element) {
 						DrawFunctionShapes.drawControlState(
