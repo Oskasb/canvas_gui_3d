@@ -41,12 +41,6 @@ define([
 			this.resolution = resolution;
 			this.lastFont = "20px Verdana";
 
-			var ctx = this.ctx;
-			this.img = new Image();
-			this.img.onload = function() {
-				console.log("Image to canvas ok")
-			};
-			this.img.src = './resources/svg/soccer.svg';
 			this.attenuateColor = 'rgba(0, 0, 0, 0.2)';
 			this.renderDepthLayers = [];
 			this.drawInstructions = [];
