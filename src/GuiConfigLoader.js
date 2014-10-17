@@ -15,7 +15,11 @@ define([
 		var GuiConfigLoader = function() {
 			this.registryUrls = {};
 
-			ConfigCache.setDataPipelineOptions(loaderOptions);
+			var applyOpts = function(opts) {
+				ConfigCache.applyDataPipelineOptions(opts);
+			};
+
+			ConfigCache.registerCategoryKeySubscriber('setup', 'pipeline', applyOpts);
 			this.canvasGuiImages = new CanvasGuiImages();
 		};
 
