@@ -42,8 +42,8 @@ define([
 
 			this.onUpdateCallbacks = [];
 
-			var configUpdated = function(config) {
-				this.handleConfigUpdate(config);
+			var configUpdated = function(url, config) {
+				this.handleConfigUpdate(url, config);
 			}.bind(this);
 
 		   PipelineAPI.subscribeToCategoryKey('setup', 'page', configUpdated);
@@ -160,7 +160,7 @@ define([
 		};
 
 
-		CanvasGui3D.prototype.handleConfigUpdate = function(config) {
+		CanvasGui3D.prototype.handleConfigUpdate = function(url, config) {
 
 			var select = config.blending.default;
 

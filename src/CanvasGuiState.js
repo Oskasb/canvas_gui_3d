@@ -44,7 +44,7 @@ define([
 
 
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
-			var updateTmpData = function(data) {
+			var updateTmpData = function(srcKey, data) {
 				if (this.activeTemplates[templateId]) {
 					console.log("Template updated:", templateId, data)
 					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.pointerCursor, this.canvasCalls, data);
@@ -95,8 +95,8 @@ define([
 		};
 
 		CanvasGuiState.prototype.attachMainStateId = function(state) {
-			var mainConfigUpdated = function(confs) {
-				console.log("Main conf updated:", confs);
+			var mainConfigUpdated = function(srcKey, confs) {
+				console.log("Main conf updated:", srcKey, confs);
 				this.attachMainConfig(confs);
 			}.bind(this);
 
