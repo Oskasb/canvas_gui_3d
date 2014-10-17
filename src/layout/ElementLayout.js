@@ -1,12 +1,10 @@
 "use strict";
 
 define([
-	'gui/layout/LayoutEnums',
-	'data_pipeline/data/ConfigCache'
+	'gui/layout/LayoutEnums'
 ],
 	function(
-		LayoutEnums,
-		ConfigCache
+		LayoutEnums
 		) {
 
 		var index = 0;

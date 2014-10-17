@@ -51,11 +51,6 @@ define([
 			this.canvasGuiState.attachMainStateId(state);
 		};
 
-		CanvasGuiMain.prototype.addUiSubstateConfig = function(config) {
-			this.canvasGuiState.attachMainConfig(config);
-
-		};
-
 		CanvasGuiMain.prototype.tickGuiMain = function(tpf) {
 			this.inputState.initFrameSample();
 			this.canvasGuiState.updateGuySystems(tpf, this.inputState);

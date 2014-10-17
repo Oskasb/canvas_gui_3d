@@ -49,7 +49,17 @@ define([
 		CanvasGuiWidget.prototype.addLayer = function(layer, parent, data) {
 
 			if (! data) data = PipelineAPI.readCachedConfigKey('shapes', layer.shape);
+			if (typeof(data) == 'string') {
 
+				var retry = function() {
+					this.addLayer(layer, parent, data);
+				}.bind(this);
+
+				setTimeout(function() {
+					retry();
+				}, 200);
+				return;
+			}
 
 
 			var newLayer = new CanvasGuiLayer(layer, parent, this.pointerCursor, this.canvasCalls, data);
@@ -110,6 +120,9 @@ define([
 
 		CanvasGuiWidget.prototype.buildCanvasWidget = function(data) {
 			this.data = data;
+			if (typeof(data) == 'string') {
+				console.error("Widget has no data yet", this)
+			}
 			console.log("Building Widget: ", this.id);
 			this.layers = [];
 

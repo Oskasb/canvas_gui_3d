@@ -16,7 +16,7 @@ define([
 		};
 
 		CanvasGuiAPI.prototype.initCanvasGui = function(masterUrl, camera, callbackMap, onReady, onError) {
-			var masterLoaded = function() {
+			var masterLoaded = function(srcKey, data) {
 				this.canvasGuiMain.initGuiMain(camera, callbackMap, this.uiTxResolution, this.pointerCursor);
 				onReady();
 			}.bind(this);

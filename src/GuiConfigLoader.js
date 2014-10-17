@@ -15,7 +15,7 @@ define([
 		var GuiConfigLoader = function() {
 			this.registryUrls = {};
 
-			var applyOpts = function(opts) {
+			var applyOpts = function(srcKey, opts) {
 				ConfigCache.applyDataPipelineOptions(opts);
 			};
 
@@ -27,16 +27,14 @@ define([
 			this.canvasGuiImages.registerSvgImageRefs(data);
 		};
 
-		GuiConfigLoader.prototype.loadConfigDataFile = function(url, ok, fail, updateCallback) {
+		GuiConfigLoader.prototype.loadConfigDataFile = function(url, ok, fail) {
 			var success = function(srcUrl, data) {
 				console.log("Gui Data Updated:", data)
 				for (var i = 0; i < data.length; i++) {
 					for (var index in data[i]) {
 						ConfigCache.dataCombineToKey(index, srcUrl, data[i]);
 						ok(data[i][index], srcUrl);
-						if (updateCallback) {
-							ConfigCache.registerCategoryUpdatedCallback(index, updateCallback);
-						}
+						ConfigCache.registerCategoryUpdatedCallback(index, ok);
 						if (index == 'svg') {
 							this.grabImages(data[i][index]);
 						}
@@ -83,7 +81,7 @@ define([
 			var loadFromMaster = function(data, srcUrl) {
 				this.loadFiles(data, srcUrl, this.registryUrls)
 			}.bind(this);
-			this.loadConfigDataFile(masterUrl, loadFromMaster, fail, loadFromMaster);
+			this.loadConfigDataFile(masterUrl, loadFromMaster, fail);
 
 		};
 

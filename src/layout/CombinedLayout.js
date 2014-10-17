@@ -1,12 +1,10 @@
 "use strict";
 
 define([
-	'gui/layout/GuiConstants',
-	'data_pipeline/data/ConfigCache'
+	'gui/layout/GuiConstants'
 ],
 	function(
-		GuiConstants,
-		ConfigCache
+		GuiConstants
 		) {
 
 

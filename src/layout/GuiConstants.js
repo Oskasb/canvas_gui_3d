@@ -51,7 +51,7 @@ define([
 		var matchKeyMapList = [];
 		var matchConstantsList = [];
 
-	 	var updKeyMaps = function(data) {
+	 	var updKeyMaps = function(srcKey, data) {
 			matchKeyMapList = [];
 			for (var index in data) {
 				matchKeyMapList.push(index);
@@ -59,7 +59,7 @@ define([
 	 		layoutKeyMaps = data;
 	 	};
 
-	 	var updConstants = function(data) {
+	 	var updConstants = function(srcKey, data) {
 			 matchConstantsList = [];
 			 for (var index in data) {
 				 matchConstantsList.push(index);

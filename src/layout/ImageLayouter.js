@@ -21,7 +21,7 @@ define([
 
 		var setupImageCallbacks = function(data, target) {
 
-			var setTheCallback = function(imgRef) {
+			var setTheCallback = function(srcKey, imgRef) {
 				target.callback = target.callbacks;
 				// Will overwrite if there are other callbacks on the same element...
 				target.callbacks = [{callback:backgroundCallback(imgRef.image, target.pos.final, target.size)}];

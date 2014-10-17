@@ -4,16 +4,14 @@ define([
 	'gui/layout/LayoutEnums',
 	'gui/layout/CanvasBoxLayout',
 	'gui/layout/ImageLayouter',
-	'gui/functions/DrawCallbacks',
-	'data_pipeline/data/ConfigCache'
+	'gui/functions/DrawCallbacks'
 
 ],
 	function(
 		LayoutEnums,
 		CanvasBoxLayout,
 		ImageLayouter,
-		DrawCallbacks,
-		ConfigCache
+		DrawCallbacks
 		) {
 
 		function clone(obj) {

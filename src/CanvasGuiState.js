@@ -27,6 +27,7 @@ define([
 			this.pointerY = 50;
 			this.canvasCalls = canvasCalls;
 			this.registerListeners();
+			this.initiatedTemplated = {};
 			this.builtTemplates = {};
 			this.activeTemplates = {};
 			this.idLayers = {};
@@ -45,7 +46,7 @@ define([
 
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
 			var updateTmpData = function(srcKey, data) {
-				if (this.activeTemplates[templateId]) {
+				if (this.initiatedTemplated[templateId]) {
 					console.log("Template updated:", templateId, data)
 					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.pointerCursor, this.canvasCalls, data);
 					templateActive(templateId)
@@ -63,7 +64,7 @@ define([
 			}.bind(this);
 
 			for (var i = 0; i < config.templates.length; i++) {
-				this.activeTemplates[config.templates[i]] = {};
+				this.initiatedTemplated[config.templates[i]] = {};
 				this.attachGuiTemplate(config.templates[i], templateActive);
 			}
 
@@ -103,7 +104,7 @@ define([
 			PipelineAPI.subscribeToCategoryKey('main_gui_states', state, mainConfigUpdated);
 
 			var masterReset = function() {
-				ConfigCache.fireCategoryCallbacks('shapes')
+			//	ConfigCache.fireCategoryCallbacks('shapes')
 			};
 
 			PipelineAPI.subscribeToCategoryUpdate('layout_key_maps', masterReset);
