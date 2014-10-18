@@ -95,13 +95,12 @@ define([
 		};
 
 		CanvasCalls.prototype.pxToX = function(px) {
-			return Math.ceil((this.resolution / 1024) * px*this.canvasGui3d.scalePxToX);
+			return this.getPxFactor() * px;
 		};
 
-		CanvasCalls.prototype.pxToY = function(px) {
-			return Math.ceil((this.resolution*(1/this.canvasGui3d.scalePxToX) / 1024) * px*this.canvasGui3d.scalePxToX);
+		CanvasCalls.prototype.getPxFactor = function() {
+			return (this.canvasGui3d.resolution / 1024) *this.canvasGui3d.scalePxToX
 		};
-
 
 		var CALLS = {
 			CALLBACK:	{id:'CALLBACK'		},

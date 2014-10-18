@@ -47,17 +47,17 @@ define([
 			setDefault(this.renderData);
 		};
 
-		ElementLayout.prototype.valueYToUnitY = function(value, unit) {
+		ElementLayout.prototype.valueYToUnitY = function(value, unit, canvasCalls) {
 			if (unit == LayoutEnums.units.pixels) {
-				return this.renderData.pos.final.top + value;
+				return this.renderData.pos.final.top + value*canvasCalls.getPxFactor();
 			} else {
 				return this.renderData.pos.final.top + (value*this.renderData.size.height*0.01);
 			}
 		};
 
-		ElementLayout.prototype.valueXToUnitX = function(value, unit) {
+		ElementLayout.prototype.valueXToUnitX = function(value, unit, canvasCalls) {
 			if (unit == LayoutEnums.units.pixels) {
-				return this.renderData.pos.final.left + value;
+				return this.renderData.pos.final.left + value*canvasCalls.getPxFactor();
 			} else {
 				return this.renderData.pos.final.left + (value*this.renderData.size.width*0.01);
 			}

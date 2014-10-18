@@ -26,8 +26,8 @@ define([
 
 		CanvasBoxLayout.configureText = function(canvasCalls, text, target, parent) {
 			target.text = {};
-			target.text.y = parent.valueYToUnitY(text.top,  text.unit) + target.size.height*0.5;
-			target.text.x = parent.valueXToUnitX(text.left, text.unit) + target.size.width*0.5;
+			target.text.y = parent.valueYToUnitY(text.top,  text.unit, canvasCalls) + target.size.height*0.5;
+			target.text.x = parent.valueXToUnitX(text.left, text.unit, canvasCalls) + target.size.width*0.5;
 			target.text.line_height = canvasCalls.pxToX(text.font_size) + text.line_spacing || canvasCalls.pxToX(text.font_size)*0.5;
 			target.text.font = canvasCalls.pxToX(text.font_size)+'px '+text.font_family;
 
@@ -60,8 +60,8 @@ define([
 		//	targetPos.final.left = parentPos.left+ canvasCalls.valueXToUnitX(posData.left, posData.unit) + canvasCalls.valueXToUnitX(targetPos.origin.left, targetPos.origin.unit);
 
 
-			targetPos.final.top =  parent.valueYToUnitY(posData.top,  posData.unit)// + parent.valueYToUnitY(targetPos.origin.top,  targetPos.origin.unit);
-			targetPos.final.left = parent.valueXToUnitX(posData.left, posData.unit)// + parent.valueXToUnitX(targetPos.origin.left, targetPos.origin.unit);
+			targetPos.final.top =  parent.valueYToUnitY(posData.top,  posData.unit, canvasCalls);// + parent.valueYToUnitY(targetPos.origin.top,  targetPos.origin.unit);
+			targetPos.final.left = parent.valueXToUnitX(posData.left, posData.unit, canvasCalls); // + parent.valueXToUnitX(targetPos.origin.left, targetPos.origin.unit);
 
 
 		//	targetPos.final.top =  parent.valueYToUnitY(targetPos.origin.top,  targetPos.origin.unit);
