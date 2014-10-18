@@ -13,7 +13,7 @@ define([
 		) {
 
 
-		var getGuiDrawCallback = function(drawCallback) {
+		var getGuiDrawCallback = function(drawCallback, params) {
 			switch (drawCallback) {
 				case "random_test":
 					return function() {
@@ -23,6 +23,11 @@ define([
 				case "frame_tpf":
 					return function() {
 						return 'ms:'+UiCallbacks.getCallById('frame_tpf')();
+					};
+					break;
+				case "game_parameter":
+					return function() {
+						return UiCallbacks.getCallById('fetchGameParameter')(params);
 					};
 					break;
 				case "more_stats":

@@ -106,7 +106,7 @@ define([
 			PipelineAPI.subscribeToCategoryKey('main_gui_states', state, mainConfigUpdated);
 
 			var masterReset = function() {
-				ConfigCache.fireCategoryCallbacks('shapes')
+			//	ConfigCache.fireCategoryCallbacks('shapes')
 			};
 
 			PipelineAPI.subscribeToCategoryUpdate('layout_key_maps', masterReset);

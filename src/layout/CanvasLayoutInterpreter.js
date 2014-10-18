@@ -118,15 +118,15 @@ define([
 		//	if (data.messages) CanvasLayoutInterpreter.applyMessageCallback(data.messages, target);
 		};
 
-		var textCallback = function(callback) {
+		var textCallback = function(callback, params) {
 			return function(target) {
-				target.text.label = callback()
+				target.text.label = callback(params)
 			}
 		};
 
 		CanvasLayoutInterpreter.buildTextLabel = function(textSource, target) {
 			if (textSource.callback) {
-				target.text.callback = textCallback(DrawCallbacks.getGuiDrawCallback(textSource.callback));
+				target.text.callback = textCallback(DrawCallbacks.getGuiDrawCallback(textSource.callback, textSource.params));
 			} else if (textSource.channel) {
 				target.text.callback = textCallback(DrawCallbacks.getGuiDrawCallback("fetchChannelData")(textSource.channel));
 			} else {
