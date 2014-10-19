@@ -55,10 +55,10 @@ define([
 				zLine = true;
 			}, 1500);
 
-			var xMax = centerX;
-			var xMin = centerX;
-			var yMax = centerZ;
-			var yMin = centerZ;
+			var xMax = centerX+25000;
+			var xMin = centerX-25000;
+			var yMax = centerZ+25000;
+			var yMin = centerZ-25000;
 
 			for (var index in gamePieces) {
 				curveCount += 1;
@@ -153,8 +153,6 @@ define([
 			var entCount = 0;
 			for (index in gamePieces) {
 				entCount += 1;
-				ctx.fillStyle = toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
-				ctx.strokeStyle =  toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
 
 				var spat = gamePieces[index].spatial;
 
@@ -166,6 +164,23 @@ define([
 				tempRect.width 	= 4;
 				tempRect.height = 4;
 
+				if (gamePieces[index].geometries[0]) {
+					ctx.fillStyle = toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
+					ctx.strokeStyle =  toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
+
+					ctx.font = "12px Russo One"
+					ctx.textAlign = "center"
+					ctx.fillText(
+						gamePieces[index].id,
+						tempRect.left,
+						tempRect.top - 6
+					);
+				} else {
+					ctx.fillStyle = toRgba([0.9, 0.6, 0.4, 1]);
+					ctx.strokeStyle = toRgba([0.9, 0.4, 0.3, 0.7]);
+				}
+
+
 				ctx.fillRect(
 					tempRect.left ,
 					tempRect.top  ,
@@ -173,13 +188,8 @@ define([
 					tempRect.height
 				);
 
-				ctx.font = "12px Russo One"
-				ctx.textAlign = "center"
-				ctx.fillText(
-					gamePieces[index].id,
-					tempRect.left,
-					tempRect.top - 6
-				);
+
+
 
 				ctx.beginPath();
 				CustomGraphCallbacks.startGraph(ctx, left, top);
