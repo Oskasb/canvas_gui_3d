@@ -151,15 +151,15 @@ define([
 
 			 */
 			var entCount = 0;
-			for (var index in gamePieces) {
+			for (index in gamePieces) {
 				entCount += 1;
 				ctx.fillStyle = toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
 				ctx.strokeStyle =  toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
 
 				var spat = gamePieces[index].spatial;
 
-				var top = ( spat.pos.data[0]-centerX)*(size.height/(rangeX*2)) +  pos.top + size.height*0.5 ;
-				var left = (  spat.pos.data[2]-centerZ)*(size.width/(rangeY*2)) + pos.left + size.width * 0.5;
+				top = ( spat.pos.data[0]-centerX)*(size.height/(rangeX*2)) +  pos.top + size.height*0.5 ;
+				left = (  spat.pos.data[2]-centerZ)*(size.width/(rangeY*2)) + pos.left + size.width * 0.5;
 
 				tempRect.left 	= left -2;
 				tempRect.top 	= top -2 -spat.pos[1]*0.02;
@@ -178,15 +178,13 @@ define([
 				ctx.fillText(
 					gamePieces[index].id,
 					tempRect.left,
-					tempRect.top - 6-spat.pos[1]*0.02
+					tempRect.top - 6
 				);
 
-
 				ctx.beginPath();
-				CustomGraphCallbacks.startGraph(ctx, left, top)
+				CustomGraphCallbacks.startGraph(ctx, left, top);
 				CustomGraphCallbacks.addPointToGraph(ctx, left, top-spat.pos[1]*0.02);
 				ctx.stroke();
-
 
 			}
 
