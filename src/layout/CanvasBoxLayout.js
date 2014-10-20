@@ -32,7 +32,7 @@ define([
 			target.text.font = canvasCalls.pxToX(text.font_size)+'px '+text.font_family;
 
 			if (typeof(text.color) == 'string') {
-				console.log("Bad text color...")
+				console.error("Bad text color:", text.color, text)
 			}
 			target.text.color = canvasCalls.toRgba(text.color);
 			target.text.align_text = text.text_align || 'start';
@@ -90,6 +90,9 @@ define([
 			target.data.xMax = canvasCalls.pxToPercentX(target.pos.final.left+target.size.width);
 			target.data.yMin = canvasCalls.pxToPercentY(target.pos.final.top);
 			target.data.yMax = canvasCalls.pxToPercentY(target.pos.final.top+target.size.height);
+			if (isNaN(target.data.xMax)) {
+				console.error("Bad data: ", canvasCalls, shapeData, target, parent);
+			}
 		};
 
 
