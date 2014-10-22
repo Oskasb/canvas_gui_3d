@@ -34,7 +34,6 @@ define(function() {
 						mouseAction = this.pressedButtons;
 						break;
 					case events.mouseout:
-						//    InputSetterGetter.stopDrag();
 						break;
 					case events.click:
 						break;
@@ -71,10 +70,7 @@ define(function() {
 
 
 	MouseActionListener.prototype.handleMouseEvt = function(evt) {
-
-
 		var clickType = buttons.LEFT;
-		//  if (evt.type!=sTestEventType) console.log(evt.type);
 		if (evt.which) {
 			if (evt.which==3) clickType=buttons.RIGHT;
 			if (evt.which==2) clickType=buttons.MIDDLE;
@@ -88,8 +84,7 @@ define(function() {
 
 
 	MouseActionListener.prototype.setupElementClickListener = function(element) {
-		//    alert("Set Click, "+element.id)
-		//  var sTestEventType='mousedown';
+
 		var handleMouseEvent = function(e) {
 			e.stopPropagation();
 			var evt = (e==null ? event:e);

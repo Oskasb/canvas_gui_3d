@@ -3,12 +3,14 @@
 define([
 	'gui/io/GameScreen',
 	'gui/io/MouseActionListener',
+	'gui/io/TouchActionListener',
 	'goo/entities/SystemBus'
 
 ],
 	function(
 		GameScreen,
 		MouseActionListener,
+		TouchActionListener,
 		SystemBus
 		) {
 
@@ -21,10 +23,10 @@ define([
 
 		var ElementListeners = function() {
 			this.mouseActionListener = new MouseActionListener();
+			this.touchActionListener = new TouchActionListener();
 			this.setupMouseListener();
+			this.setupTouchListener();
 		};
-
-
 
 		ElementListeners.prototype.setupMouseListener = function() {
 			this.mouseActionListener.setupElementClickListener(GameScreen.getElement());
@@ -55,9 +57,37 @@ define([
 			});
 		};
 
+		ElementListeners.prototype.setupTouchListener = function() {
+			this.touchActionListener.setupElementTouchListener(GameScreen.getElement());
+			GameScreen.getElement().addEventListener('touchstart', function(e) {
+				e.preventDefault();
+				x = (e.touches[0].clientX);
+				y = (e.touches[0].clientY);
+				dx = 0;
+				dy = 0;
+			});
+
+			GameScreen.getElement().addEventListener('touchmove', function(e) {
+				e.preventDefault();
+				x = (e.touches[0].clientX);
+				y = (e.touches[0].clientY);
+				dx = 2 * ((x) - GameScreen.getWidth() / 2) / GameScreen.getWidth();
+				dy = 2 * ((y) - GameScreen.getHeight() / 2) / GameScreen.getHeight();
+			});
+
+
+			GameScreen.getElement().addEventListener('touchend', function(e) {
+				e.preventDefault();
+				dx = 0;
+				dy = 0;
+			});
+		};
+
 
 		ElementListeners.prototype.sampleMouseState = function(mouseStore) {
 			this.mouseActionListener.sampleMouseAction(mouseStore);
+			this.touchActionListener.sampleTouchAction(mouseStore);
+
 			mouseStore.x = x;
 			mouseStore.y = y;
 			mouseStore.dx = dx;
@@ -67,7 +97,7 @@ define([
 			wheelDelta = 0;
 			dx = 0;
 			dy = 0;
-
+			console.log("sample mouse action 0: ", mouseStore.action[0])
 		};
 
 
