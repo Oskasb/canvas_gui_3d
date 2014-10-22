@@ -25,8 +25,14 @@ define([
 			on_applied:'on_applied'
 		};
 
+		var RenderCall = function() {
+			this.renderData = {};
+			this.zIndex = 0;
+		};
+
 		var CanvasGuiLayer = function(layerKeys, parent, cursor, canvasCalls, data) {
 			this.pointerCursor = cursor;
+			this.renderCall = new RenderCall();
 			if (parent) {
 				this.parentLayout = parent.renderStates.passive;
 				this.zIndex = parent.zIndex;
@@ -89,14 +95,24 @@ define([
 		};
 
 
-		CanvasGuiLayer.prototype.drawCanvasLayer = function(tpf, mouseState) {
-			if (this.state == this.guiStateKeys.hidden) return;
-
-			if (this.renderStates[this.guiStateKeys.on_hover]){
+		CanvasGuiLayer.prototype.updateInteractiveState = function(tpf, mouseState) {
+			if (this.renderStates.on_hover){
 				this.interactiveSurface.updateSurface(tpf, mouseState)
 			}
 
-			SystemBus.emit('guiFlash', {renderData:this.renderStates[this.state].renderData, zIndex:this.zIndex});
+		};
+
+		CanvasGuiLayer.prototype.updateRenderData = function() {
+			this.renderCall.renderData = this.renderStates[this.state].renderData;
+			this.renderCall.zIndex = this.zIndex;
+			this.canvasCalls.drawToCanvasGui(this.renderCall);
+		};
+
+		CanvasGuiLayer.prototype.drawCanvasLayer = function(tpf, mouseState) {
+			if (this.state == this.guiStateKeys.hidden) return;
+			this.updateInteractiveState(tpf, mouseState);
+			this.updateRenderData();
+
 		};
 
 		CanvasGuiLayer.prototype.setRenderState = function(state) {
