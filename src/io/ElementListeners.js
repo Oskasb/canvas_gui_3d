@@ -97,7 +97,6 @@ define([
 			wheelDelta = 0;
 			dx = 0;
 			dy = 0;
-			console.log("sample mouse action 0: ", mouseStore.action[0])
 		};
 
 
