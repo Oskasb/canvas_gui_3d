@@ -3,15 +3,12 @@
 define([
 	'gui/io/GameScreen',
 	'gui/io/MouseActionListener',
-	'gui/io/TouchActionListener',
-	'goo/entities/SystemBus'
-
+	'gui/io/TouchActionListener'
 ],
 	function(
 		GameScreen,
 		MouseActionListener,
-		TouchActionListener,
-		SystemBus
+		TouchActionListener
 		) {
 
 

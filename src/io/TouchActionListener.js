@@ -20,11 +20,11 @@ define([], function() {
 	TouchActionListener.prototype.setupElementTouchListener = function(element) {
 
 		var handleTouchStart = function() {
-			touchAction[0] = 1
+			touchAction[0] = 1;
 		};
 
 		var handleTouchEnd = function() {
-			touchAction[0] = 0
+			touchAction[0] = 1;
 		};
 
 		element.addEventListener(events.touchstart, handleTouchStart);
@@ -34,7 +34,7 @@ define([], function() {
 	TouchActionListener.prototype.sampleTouchAction = function(mouseStore) {
 
 		mouseStore.action[0] += touchAction[0];
-
+		touchAction[0] = 0;
 	};
 
 	return TouchActionListener
