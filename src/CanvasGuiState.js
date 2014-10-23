@@ -100,6 +100,9 @@ define([
 		CanvasGuiState.prototype.attachMainStateId = function(state) {
 			var mainConfigUpdated = function(srcKey, confs) {
 				console.log("Main conf updated:", srcKey, confs);
+				if (confs.blend_mode) {
+					this.canvasCalls.canvasGui3d.setBlendModeId(confs.blend_mode);
+				}
 				this.attachMainConfig(confs);
 			}.bind(this);
 

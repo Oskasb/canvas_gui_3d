@@ -159,12 +159,8 @@ define([
 			this.onFrustumUpdate();
 		};
 
-
-		CanvasGui3D.prototype.handleConfigUpdate = function(url, config) {
-
-			var select = config.blending.default;
-
-			var opts = config.blending.modes[select];
+		CanvasGui3D.prototype.updateBlendMode = function() {
+			var opts = this.config.blending.modes[this.blendModeId];
 
 			if (!this.material) {
 				this.materialSettings = {
@@ -178,6 +174,17 @@ define([
 					this.material.blendState[index] = opts[index];
 				}
 			}
+		};
+
+
+		CanvasGui3D.prototype.setBlendModeId = function(blendModeId) {
+			this.blendModeId = blendModeId;
+			this.updateBlendMode();
+		};
+
+		CanvasGui3D.prototype.handleConfigUpdate = function(url, config) {
+			this.config = config;
+			this.updateBlendMode();
 
 			if (config.resolution != this.resolution) {
 				this.resolution = config.resolution;
