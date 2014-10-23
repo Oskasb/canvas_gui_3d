@@ -33,7 +33,6 @@ define([
 
 		GuiConfigLoader.prototype.loadConfigDataFile = function(url, ok, fail) {
 			var success = function(srcUrl, data) {
-				console.log("Gui Data Updated:", data)
 				for (var i = 0; i < data.length; i++) {
 					for (var index in data[i]) {
 						ConfigCache.dataCombineToKey(index, srcUrl, data[i]);
@@ -60,9 +59,9 @@ define([
 			var ok = function() {
 				dlCount -= 1;
 				if (dlCount == 0) {
-					console.log("Great success: ", ConfigCache.getCachedConfigs(), srcUrl);
+				//	console.log("Great success: ", ConfigCache.getCachedConfigs(), srcUrl);
 					if (!srcUrl) {
-						console.log("Updated data", data);
+
 						return;
 					}
 					registryUrls[srcUrl].success(srcUrl);
@@ -70,7 +69,7 @@ define([
 			}.bind(this);
 
 			var fail = function(err) {
-				console.log("Epic Fail: ", ConfigCache, this.registryUrls);
+				console.error("Epic Fail: ", ConfigCache, this.registryUrls);
 				this.registryUrls[srcUrl].fail(err);
 			};
 

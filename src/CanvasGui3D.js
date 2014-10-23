@@ -21,7 +21,6 @@ define([
 		) {
 
 	    var CanvasGui3D = function(camera, resolution) {
-			console.log("Canvas Gui camera: ", camera);
 			this.camera = camera;
 			this.resolution = resolution;
 		    this.size = 1;

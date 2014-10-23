@@ -24,7 +24,7 @@ define([],
 
 		UiCallbacks.getCallById = function(id) {
 			if (!drawCallbacks[id]) {
-				console.log("No Ui callback with id: ", id)
+				console.error("No Ui callback with id: ", id)
 				return function() {};
 			}
 			return drawCallbacks[id]

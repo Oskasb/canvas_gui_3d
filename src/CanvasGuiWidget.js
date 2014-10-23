@@ -123,10 +123,8 @@ define([
 			if (typeof(data) == 'string') {
 				console.error("Widget has no data yet", this)
 			}
-			console.log("Building Widget: ", this.id);
+
 			this.layers = [];
-
-
 
 			var build = function() {
 				if (this.data.layers) {

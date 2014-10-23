@@ -289,7 +289,7 @@ define([
 
 		CanvasCalls.prototype.drawToCanvasGui = function(draw) {
 			if (!draw.renderData) {
-				console.log("No renderData")
+				console.error("No renderData", draw)
 				draw.renderData = draw;
 			}
 

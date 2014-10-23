@@ -46,7 +46,7 @@ define([
 				target.rect.w = target.size.width;
 				target.rect.h = target.size.height;
 				if (typeof(background.color) == 'string') {
-					console.log("Bad background...")
+					console.error("Bad background...", background, target)
 				}
 				target.rect.color = canvasCalls.toRgba(background.color);
 			}

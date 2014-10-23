@@ -47,12 +47,10 @@ define([
 		CanvasGuiState.prototype.attachGuiTemplate = function(templateId, templateActive) {
 			var updateTmpData = function(srcKey, data) {
 				if (this.initiatedTemplated[templateId]) {
-					console.log("Template updated:", templateId, data)
 					this.builtTemplates[templateId] = new CanvasGuiWidget(templateId, this.uiParent, this.pointerCursor, this.canvasCalls, data);
 					templateActive(templateId)
 				}
 			}.bind(this);
-			console.log("Request template: ", templateId)
 			PipelineAPI.subscribeToCategoryKey('template', templateId, updateTmpData);
 		};
 
@@ -80,7 +78,7 @@ define([
 				}, 200)
 			};
 
-			ConfigCache.setMasterRestFunction(masterReset)
+			ConfigCache.setMasterResetFunction(masterReset)
 		};
 
 		CanvasGuiState.prototype.clearCurrentGui = function() {
@@ -112,7 +110,6 @@ define([
 
 		CanvasGuiState.prototype.attachMainStateId = function(state) {
 			var mainConfigUpdated = function(srcKey, confs) {
-				console.log("Main conf updated:", srcKey, confs);
 				if (confs.gui_settings) {
 					this.applyGuiSettings(confs.gui_settings);
 
@@ -135,11 +132,11 @@ define([
 			var templateActive = function(id) {
 				this.activeTemplates[id] = this.builtTemplates[id];
 			}.bind(this);
-			console.log("Rebuilding Gui Templates");
+
 			for (var index in this.activeTemplates) {
-				console.log("template:", index);
+
 				this.attachGuiTemplate(index, templateActive)
-			//	this.activeTemplates[index].buildCanvasWidget(ConfigCache.getConfigKey('template',index));
+
 			}
 		};
 

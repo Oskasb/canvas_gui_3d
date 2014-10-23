@@ -127,7 +127,7 @@ define([
 				for (var key in source) {
 
 					if (key == 'image_svg') {
-						console.log("Svg Key", target, source)
+
 					}
 
 					if (typeof(source[key]) == 'object') {

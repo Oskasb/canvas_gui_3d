@@ -31,7 +31,6 @@ define([
 
 		InteractiveSurface.prototype.triggerOnApply = function() {
 			for (var key in this.onApplyCallbacks) {
-				console.log("Trigger: ", this.canvasGuiLayer.id, this.onApplyCallbacks);
 				this.onApplyCallbacks[key]();
 			}
 		};
