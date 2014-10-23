@@ -97,11 +97,25 @@ define([
 			this.attachMainStateId(state);
 		};
 
+		CanvasGuiState.prototype.applyGuiSettings = function(settings) {
+			if (settings.blend_mode) {
+				this.canvasCalls.canvasGui3d.setBlendModeId(settings.blend_mode);
+			}
+
+			if (settings.attenuation) {
+				this.canvasCalls.setAttenuateColor([0, 0, 0, settings.attenuation]);
+			}
+
+		};
+
+
+
 		CanvasGuiState.prototype.attachMainStateId = function(state) {
 			var mainConfigUpdated = function(srcKey, confs) {
 				console.log("Main conf updated:", srcKey, confs);
-				if (confs.blend_mode) {
-					this.canvasCalls.canvasGui3d.setBlendModeId(confs.blend_mode);
+				if (confs.gui_settings) {
+					this.applyGuiSettings(confs.gui_settings);
+
 				}
 				this.attachMainConfig(confs);
 			}.bind(this);
@@ -174,7 +188,7 @@ define([
 		};
 
 		CanvasGuiState.prototype.updatePointerState = function(pointer) {
-
+			var now = new Date().getTime()*0.01;
 			var draw = {
 				line:{
 					fromX:this.pointerX,
@@ -182,7 +196,7 @@ define([
 					toX:pointer.x,
 					toY:pointer.y,
 					w:12,
-					color:[0.6, 0.2, 0.9, 0.8]
+					color:[0.6+Math.sin(now)*0.4, 0.5+Math.sin(now*0.7)*0.4, 0.6+Math.cos(now)*0.3, 0.8]
 				}
 			};
 			this.pointerX = pointer.x;
