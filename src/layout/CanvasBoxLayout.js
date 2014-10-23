@@ -53,6 +53,9 @@ define([
 			if (background.image_svg) {
 				target.backgroundSvg = background.image_svg;
 			}
+			if (background.image_bin) {
+				target.backgroundBin = background.image_bin;
+			}
 		};
 
 		CanvasBoxLayout.applyPosition = function(canvasCalls, posData, targetPos, parentPos, parent) {

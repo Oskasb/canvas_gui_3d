@@ -19,7 +19,7 @@ define([
 			}
 		};
 
-		var setupImageCallbacks = function(data, target) {
+		var setupImageCallbacks = function(id, data, target) {
 
 			var setTheCallback = function(srcKey, imgRef) {
 				target.callback = target.callbacks;
@@ -28,13 +28,17 @@ define([
 			};
 
 			if (target.backgroundSvg) {
-				ConfigCache.subscribeToImageId(target.backgroundSvg, setTheCallback);
+				ConfigCache.subscribeToImageId(id, target.backgroundSvg, setTheCallback);
+			}
+
+			if (target.backgroundBin) {
+				ConfigCache.subscribeToImageId(id, target.backgroundBin, setTheCallback);
 			}
 
 		};
 
-		ImageLayouter.setupDrawImage = function(data, target) {
-			setupImageCallbacks(data, target)
+		ImageLayouter.setupDrawImage = function(id, data, target) {
+			setupImageCallbacks(id, data, target)
 		};
 
 		return ImageLayouter

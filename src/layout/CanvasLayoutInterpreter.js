@@ -111,7 +111,7 @@ define([
 
 			CanvasBoxLayout.layoutCanvasBox(canvasCalls, data, target, parent);
 
-			ImageLayouter.setupDrawImage(target.drawData, target.renderData);
+			ImageLayouter.setupDrawImage(target.id, target.drawData, target.renderData);
 			if (target.drawData.draw_callback) CanvasLayoutInterpreter.setupDrawCallback(target.drawData.draw_callback, target.renderData);
 			CanvasLayoutInterpreter.setupDrawText(target.drawData, target.renderData);
 		//	if (target.text) CanvasLayoutInterpreter.applyTextLabel(data, target);

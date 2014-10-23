@@ -23,8 +23,12 @@ define([
 			this.canvasGuiImages = new CanvasGuiImages();
 		};
 
-		GuiConfigLoader.prototype.grabImages = function(data) {
+		GuiConfigLoader.prototype.grabSvgImages = function(data) {
 			this.canvasGuiImages.registerSvgImageRefs(data);
+		};
+
+		GuiConfigLoader.prototype.grabBinaryImages = function(data) {
+			this.canvasGuiImages.registerBinaryImageRefs(data);
 		};
 
 		GuiConfigLoader.prototype.loadConfigDataFile = function(url, ok, fail) {
@@ -36,7 +40,10 @@ define([
 						ok(data[i][index], srcUrl);
 						ConfigCache.registerCategoryUpdatedCallback(index, ok);
 						if (index == 'svg') {
-							this.grabImages(data[i][index]);
+							this.grabSvgImages(data[i][index]);
+						}
+						if (index == 'bin') {
+							this.grabBinaryImages(data[i][index]);
 						}
 					}
 				}
