@@ -159,25 +159,35 @@ define([
 				top = ( spat.pos.data[0]-centerX)*(size.height/(rangeX*2)) +  pos.top + size.height*0.5 ;
 				left = (  spat.pos.data[2]-centerZ)*(size.width/(rangeY*2)) + pos.left + size.width * 0.5;
 
-				tempRect.left 	= left -2;
-				tempRect.top 	= top -2 -spat.pos[1]*0.02;
-				tempRect.width 	= 4;
-				tempRect.height = 4;
+
 
 				if (gamePieces[index].geometries[0]) {
+					tempRect.left 	= left -2;
+					tempRect.top 	= top -2 -spat.pos[1]*0.02;
+					tempRect.width 	= 4;
+					tempRect.height = 4;
+
 					ctx.fillStyle = toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
+
+			/*
 					ctx.strokeStyle =  toRgba([0.6+Math.sin(entCount*0.25)*0.4, 0.6+Math.sin(entCount*0.15)*0.4, 0.6+Math.cos(entCount*0.25)*0.4, 1]);
 
-					ctx.font = "12px Russo One"
+
+					ctx.font = "10px Russo One"
 					ctx.textAlign = "center"
 					ctx.fillText(
 						gamePieces[index].id,
 						tempRect.left,
 						tempRect.top - 6
 					);
+			*/
 				} else {
-					ctx.fillStyle = toRgba([0.9, 0.6, 0.4, 1]);
-					ctx.strokeStyle = toRgba([0.9, 0.4, 0.3, 0.7]);
+					tempRect.left 	= left -1;
+					tempRect.top 	= top -1 -spat.pos[1]*0.02;
+					tempRect.width 	= 2;
+					tempRect.height = 2;
+					ctx.fillStyle = toRgba([0.9, 0.6, 0.4, 0.8]);
+					ctx.strokeStyle = toRgba([0.9, 0.4, 0.3, 0.2]);
 				}
 
 
