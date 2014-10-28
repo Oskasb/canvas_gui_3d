@@ -278,18 +278,27 @@ define([
 			this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		};
 
+		var t = 0;
+
 		CanvasCalls.prototype.updateCanvasCalls = function(tpf) {
+
+		//	t+=tpf;
+		//	if (t < 1) return
+		//	t = 0;
 
 			this.canvasGui3d.updateCanvasGui();
 			UiCallbacks.getCallById('processCallbacks')(tpf);
 			this.attenuateGui();
 			this.drawDepthLayers();
+			this.canvasGui3d.applyChanges();
 		};
 
 
 		CanvasCalls.prototype.drawToCanvasGui = function(draw) {
+
+		//	if (t < 0.9) return
 			if (!draw.renderData) {
-				console.error("No renderData", draw)
+				console.error("No renderData", draw);
 				draw.renderData = draw;
 			}
 
