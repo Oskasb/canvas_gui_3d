@@ -153,7 +153,7 @@ define([
 			//	this.canvas.height = Math.floor(Math.abs(this.resolution/this.aspect));
 
 			this.uiQuad.transformComponent.transform.rotation.fromAngles(0, 0, 0);
-			this.uiQuad.transformComponent.transform.scale.set(this.size*1.01, -this.size*1.01, -1);
+			this.uiQuad.transformComponent.transform.scale.set(this.size*1.01, this.size*1.01, -1);
 			this.uiQuad.transformComponent.setUpdated();
 			this.onFrustumUpdate();
 		};
@@ -193,17 +193,18 @@ define([
 
 		CanvasGui3D.prototype.updateCanvasGui = function() {
 			this.updateFrustum();
+
 		};
 
-		var cd = 59;
+	//	var cd = 59;
 		CanvasGui3D.prototype.applyChanges = function() {
-			       cd --
-			if (cd > 0) return;
-			var buffer = new Uint8Array(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data);
+		//	       cd --
+		//	if (cd > 0) return;
+		//	var buffer = new Uint8Array(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data);
 		//	console.log(this.texture)
-				this.texture.addSubImageDataUpdate(0, 0, this.canvas.width, this.canvas.height, null, null, buffer)
-			//	this.texture.addSubImageDataUpdate(0, 0,null, null, null, null, this.ctx)
-			//	this.texture.setNeedsUpdate();
+			//		this.texture.addSubImageDataUpdate(0, 0, this.canvas.width, this.canvas.height, null, null, buffer)
+			//				this.texture.addSubImageDataUpdate(0, 0,null, null, null, null, this.canvas)
+					this.texture.setNeedsUpdate();
 		};
 
 		CanvasGui3D.prototype.onFrustumUpdate = function() {
