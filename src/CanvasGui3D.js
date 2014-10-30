@@ -200,8 +200,8 @@ define([
 		CanvasGui3D.prototype.applyChanges = function() {
 		//	       cd --
 		//	if (cd > 0) return;
-		//	var buffer = new Uint8Array(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data);
-		//	console.log(this.texture)
+			//	var buffer = new Uint8Array(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data);
+				//	console.log(this.texture)
 			//		this.texture.addSubImageDataUpdate(0, 0, this.canvas.width, this.canvas.height, null, null, buffer)
 			//				this.texture.addSubImageDataUpdate(0, 0,null, null, null, null, this.canvas)
 					this.texture.setNeedsUpdate();

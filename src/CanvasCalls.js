@@ -285,12 +285,12 @@ define([
 		//	t+=tpf;
 		//	if (t < 1) return
 		//	t = 0;
-
+			this.canvasGui3d.applyChanges();
 			this.canvasGui3d.updateCanvasGui();
 			UiCallbacks.getCallById('processCallbacks')(tpf);
 			this.attenuateGui();
 			this.drawDepthLayers();
-			this.canvasGui3d.applyChanges();
+
 		};
 
 
