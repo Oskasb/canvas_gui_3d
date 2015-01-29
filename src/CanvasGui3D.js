@@ -20,8 +20,11 @@ define([
 		PipelineAPI
 		) {
 
-	    var CanvasGui3D = function(camera, resolution) {
-			this.camera = camera;
+	    var CanvasGui3D = function(cameraEntity, resolution) {
+			console.log(cameraEntity)
+			this.cameraEntity = cameraEntity;
+			this.camera = cameraEntity.cameraComponent.camera;
+
 			this.resolution = resolution;
 		    this.size = 1;
 			this.aspect = 1;
@@ -36,7 +39,7 @@ define([
 				blendDst : 'SrcAlphaFactor'
 			};
 
-			this.setupParts(camera);
+			this.setupParts();
 			this.constructCanvas();
 
 			this.onUpdateCallbacks = [];
@@ -50,8 +53,8 @@ define([
 
 		};
 
-		CanvasGui3D.prototype.setupParts = function(camera) {
-			this.uiQuad = this.createQuadEntity(camera.entity);
+		CanvasGui3D.prototype.setupParts = function() {
+			this.uiQuad = this.createQuadEntity(this.cameraEntity);
 			this.material = this.createCanvasMaterial(ShaderLib.textured);
 		};
 
@@ -115,8 +118,8 @@ define([
 			this.canvas.height = resolution;
 			this.canvas.dataReady = true;
 			this.ctx = this.canvas.getContext('2d');
-			this.setupMesh()
-			this.attachQuad(this.uiQuad, camera.entity, this.material);
+			this.setupMesh();
+			this.attachQuad(this.uiQuad, this.cameraEntity, this.material);
 			this.ctx.globalCompositeOperation = 'source-over';
 			return this.ctx;
 		};

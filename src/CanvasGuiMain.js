@@ -31,8 +31,8 @@ define([
 			this.guiConfigLoader.initConfigs(masterUrl, ok, fail);
 		};
 
-		CanvasGuiMain.prototype.initGuiMain = function(camera, callbackMap, uiResolution) {
-			this.canvasCalls = new CanvasCalls(camera, uiResolution, callbackMap);
+		CanvasGuiMain.prototype.initGuiMain = function(cameraEntity, callbackMap, uiResolution) {
+			this.canvasCalls = new CanvasCalls(cameraEntity, uiResolution, callbackMap);
 			this.canvasGuiState = new CanvasGuiState(this.canvasCalls, this.pointerCursor);
 			var reset = function() {
 				this.canvasGuiState.rebuildGuiLayers();

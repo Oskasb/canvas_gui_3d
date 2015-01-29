@@ -15,11 +15,11 @@ define([
 		UiParent
 		) {
 
-		var CanvasCalls = function(camera, resolution, uiCallbacks) {
+		var CanvasCalls = function(cameraEntity, resolution, uiCallbacks) {
 			this.callsToCanvas = 0;
 			this.registerUiCallbacks(uiCallbacks)
 			this.uiParent = new UiParent(this);
-			this.canvasGui3d = new CanvasGui3d(camera, resolution);
+			this.canvasGui3d = new CanvasGui3d(cameraEntity, resolution);
 			this.aspect = this.canvasGui3d.aspect;
 			var onUpdate = function() {
 				this.updateParentLayout();

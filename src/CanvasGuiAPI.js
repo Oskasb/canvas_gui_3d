@@ -15,9 +15,9 @@ define([
 			this.pointerCursor = this.canvasGuiMain.pointerCursor;
 		};
 
-		CanvasGuiAPI.prototype.initCanvasGui = function(masterUrl, camera, callbackMap, onReady, onError) {
+		CanvasGuiAPI.prototype.initCanvasGui = function(masterUrl, cameraEntity, callbackMap, onReady, onError) {
 			var masterLoaded = function(srcKey, data) {
-				this.canvasGuiMain.initGuiMain(camera, callbackMap, this.uiTxResolution, this.pointerCursor);
+				this.canvasGuiMain.initGuiMain(cameraEntity, callbackMap, this.uiTxResolution, this.pointerCursor);
 				onReady(srcKey, data);
 			}.bind(this);
 			this.canvasGuiMain.loadMasterConfig(masterUrl, masterLoaded, onError);
