@@ -62,6 +62,16 @@ define([
 						);
 					};
 					break;
+				case "setting_control_update":
+					return function(ctx, element) {
+						DrawFunctionShapes.drawControlState(
+							UiCallbacks.getCallById('fetchSettingState')(element.callbackData.params.control),
+							ctx,
+							element,
+							element.callbackData.params
+						);
+					};
+					break;
 				case "applied_control_update":
 					return function(ctx, element) {
 						DrawFunctionShapes.drawControlState(
