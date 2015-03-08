@@ -18,8 +18,6 @@ define([
 		) {
 
 
-
-
 		var CanvasGuiState = function(canvasCalls, cursor) {
 			this.uiParent = canvasCalls.uiParent;
 			this.pointerCursor = cursor;

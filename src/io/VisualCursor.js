@@ -53,7 +53,7 @@ define([
 						w: 2*1+(distance+0.4),
 						color:this.vectorColor
 					},
-					zIndex:1000}
+					zIndex:10000}
 			});
 		};
 
@@ -71,7 +71,7 @@ define([
 						w: 2*1+(distance+0.4),
 						color:this.vectorColor
 					},
-					zIndex:1000}
+					zIndex:10000}
 
 			});
 		};
@@ -100,7 +100,7 @@ define([
 						w: 2+(distance+0.4),
 						color:this.vectorColor
 					},
-					zIndex:1000}
+					zIndex:10000}
 			});
 			SystemBus.emit('guiFlash', {
 				renderData:{
@@ -112,7 +112,7 @@ define([
 						w: 2+(distance+0.4),
 						color:this.vectorColor
 					},
-					zIndex:1000}
+					zIndex:10000}
 			});
 		};
 
@@ -128,7 +128,7 @@ define([
 						w: 5+2*state,
 						color:this.vectorColor
 					},
-					zIndex:1000}
+					zIndex:10000}
 			});
 		};
 

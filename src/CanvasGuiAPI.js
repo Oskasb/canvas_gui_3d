@@ -39,6 +39,10 @@ define([
 			return this.pointerCursor;
 		};
 
+		CanvasGuiAPI.prototype.addGuiStateTransitionCallback = function(transitionId, callback) {
+			this.canvasGuiMain.addGuiStateTransitionCallback(transitionId, callback)
+		};
+
 		CanvasGuiAPI.prototype.getPointerState = function() {
 			return this.getPointerCursor().getPointerState();
 		};

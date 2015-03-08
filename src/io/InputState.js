@@ -148,7 +148,6 @@ define([
 					this.mouseState.interactionTargets[i].onControlHover();
 				}
 			}
-
 		};
 
 		return InputState;

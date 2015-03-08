@@ -59,6 +59,10 @@ define([
 
 		};
 
+		CanvasGuiMain.prototype.addGuiStateTransitionCallback = function(transitionId, callback) {
+			this.pointerCursor.addGuiStateTransitionCallback(transitionId, callback)
+		};
+
 		return CanvasGuiMain;
 
 });

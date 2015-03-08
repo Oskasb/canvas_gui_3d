@@ -96,11 +96,6 @@ define([
 			dy = 0;
 		};
 
-
-
 		return ElementListeners;
-
-
-
 
 	});

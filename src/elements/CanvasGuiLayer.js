@@ -112,14 +112,25 @@ define([
 			if (this.state == this.guiStateKeys.hidden) return;
 			this.updateInteractiveState(tpf, mouseState);
 			this.updateRenderData();
-
+			this.notifyRenderedState(this.state);
 		};
 
 		CanvasGuiLayer.prototype.setRenderState = function(state) {
 			if (state == this.guiStateKeys.hidden) this.state = state;
 			if (!this.renderStates[state]) return;
+
 			this.state = state;
 		};
+
+		CanvasGuiLayer.prototype.notifyRenderedState = function(state) {
+			if (this.renderedDtate != state) {
+				if (this.pointerCursor) {
+					this.pointerCursor.notifyInputStateTransition(state);
+				}
+			}
+			this.renderedDtate = state;
+		};
+
 
 		CanvasGuiLayer.prototype.combineDataForState = function(property, delta, targetState) {
 			var combine = function(prop, source, target) {
