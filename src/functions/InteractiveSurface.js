@@ -135,7 +135,6 @@ define([
 		InteractiveSurface.prototype.beginValueManipulation = function() {
 
 			for (var i = 0; i < this.onDragCallbacks.length; i++) {
-				console.log("Trigger callback: ", this.onDragCallbacks[i])
 				if (this.onDragCallbacks[i].params.control) {
 					this.onDragCallbacks[i].startDrag[this.onDragCallbacks[i].params.axis] = UiCallbacks.getCallById('fetchControlState')(this.onDragCallbacks[i].params.control);
 				} else if (this.onDragCallbacks[i].params.setting) {

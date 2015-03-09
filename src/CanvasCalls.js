@@ -367,7 +367,7 @@ define([
 			if (this.resolution != this.canvasGui3d.resolution) {
 				this.callResetCallbacks();
 			}
-			
+
 		};
 
 		CanvasCalls.prototype.registerResetCallback = function(callback) {
