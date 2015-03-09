@@ -43,6 +43,10 @@ define([
 			this.canvasGuiMain.addGuiStateTransitionCallback(transitionId, callback)
 		};
 
+		CanvasGuiAPI.prototype.setGuiTextureScale = function(txScale) {
+			this.canvasGuiMain.setGuiTextureScale(txScale)
+		};
+
 		CanvasGuiAPI.prototype.getPointerState = function() {
 			return this.getPointerCursor().getPointerState();
 		};

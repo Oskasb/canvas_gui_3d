@@ -274,6 +274,7 @@ define([
 		};
 
 		CanvasCalls.prototype.attenuateGui = function() {
+			this.resolution = this.canvasGui3d.resolution;
 			this.ctx.fillStyle = this.attenuateColor;
 			this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		};
@@ -360,6 +361,14 @@ define([
 			this.attenuateColor = this.toRgba(color);
 		};
 
+		CanvasCalls.prototype.applyTextureScale = function(txScale) {
+			this.canvasGui3d.scaleCanvasGuiResolution(txScale);
+
+			if (this.resolution != this.canvasGui3d.resolution) {
+				this.callResetCallbacks();
+			}
+			
+		};
 
 		CanvasCalls.prototype.registerResetCallback = function(callback) {
 			this.resetCallbacks.push(callback);

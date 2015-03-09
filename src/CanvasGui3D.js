@@ -1,6 +1,7 @@
 "use strict";
 
 define([
+		'goo/math/MathUtils',
 	'goo/renderer/Texture',
 	'goo/renderer/Material',
 	'goo/entities/components/MeshRendererComponent',
@@ -11,6 +12,7 @@ define([
 
 ],
 	function(
+		MathUtils,
 		Texture,
 		Material,
 		MeshRendererComponent,
@@ -25,8 +27,13 @@ define([
 			this.cameraEntity = cameraEntity;
 			this.camera = cameraEntity.cameraComponent.camera;
 
+			this.config = {
+				resolution:resolution
+			};
+
 			this.resolution = resolution;
 		    this.size = 1;
+			this.txScale = 1;
 			this.aspect = 1;
 		    this.scalePercentToX = 1;
 		    this.scalePxToX = 1;
@@ -184,14 +191,21 @@ define([
 			this.updateBlendMode();
 		};
 
+		CanvasGui3D.prototype.scaleCanvasGuiResolution = function(scale) {
+			this.txScale = scale;
+			var targetRes = MathUtils.nearestHigherPowerOfTwo(this.config.resolution * this.txScale);
+
+			if (targetRes != this.resolution) {
+				this.resolution = targetRes;
+				this.resolutionUpdated();
+			}
+		};
+
+
 		CanvasGui3D.prototype.handleConfigUpdate = function(url, config) {
 			this.config = config;
 			this.updateBlendMode();
-
-			if (config.resolution != this.resolution) {
-				this.resolution = config.resolution;
-				if (this.ctx) this.resolutionUpdated();
-			}
+			this.scaleCanvasGuiResolution(this.txScale)
 		};
 
 		CanvasGui3D.prototype.updateCanvasGui = function() {
