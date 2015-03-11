@@ -105,6 +105,7 @@ define([
 
 		CanvasGui3D.prototype.setupMesh = function() {
 			this.texture = new Texture(this.canvas, null, this.canvas.width, this.canvas.height);
+			console.log("Setup gui TX: ", this.canvas.width, this.canvas.height)
 			this.material.setTexture('DIFFUSE_MAP', this.texture);
 			this.texture.setNeedsUpdate();
 		};
@@ -132,9 +133,7 @@ define([
 		};
 
 		CanvasGui3D.prototype.updateFrustum = function() {
-			if (this.top === this.camera._frustumTop && this.left === Math.abs(this.camera._frustumLeft)) {
-				return;
-			}
+
 
 			this.top = this.camera._frustumTop;
 			this.left = Math.abs(this.camera._frustumLeft);
@@ -209,8 +208,11 @@ define([
 		};
 
 		CanvasGui3D.prototype.updateCanvasGui = function() {
-			this.updateFrustum();
+			if (this.top === this.camera._frustumTop && this.left === Math.abs(this.camera._frustumLeft)) {
 
+			} else {
+				this.updateFrustum();
+			}
 		};
 
 	//	var cd = 59;
