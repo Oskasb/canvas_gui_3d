@@ -167,6 +167,12 @@ define([
 			this.onFrustumUpdate();
 		};
 
+		CanvasGui3D.prototype.applyBlendModeSelection = function(floatValue) {
+
+			
+
+		};
+
 		CanvasGui3D.prototype.updateBlendMode = function() {
 			var opts = this.config.blending.modes[this.blendModeId];
 

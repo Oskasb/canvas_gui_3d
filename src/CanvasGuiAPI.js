@@ -27,6 +27,10 @@ define([
 			this.canvasGuiMain.setMainUiState(state);
 		};
 
+		CanvasGuiAPI.prototype.adjustCanvasBlendMode = function(modeValue) {
+			this.canvasGuiMain.adjustCanvasBlendMode(modeValue);
+		};
+
 		CanvasGuiAPI.prototype.attachUiSubstateId = function(state) {
 			this.canvasGuiMain.addUiSubstateId(state);
 		};
