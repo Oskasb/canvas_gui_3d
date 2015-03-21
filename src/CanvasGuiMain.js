@@ -51,8 +51,8 @@ define([
 			this.canvasGuiState.attachMainStateId(state);
 		};
 
-		CanvasGuiMain.prototype.adjustCanvasBlendMode = function(modeValue) {
-			this.canvasCalls.canvasGui3d.applyBlendModeSelection(modeValue);
+		CanvasGuiMain.prototype.adjustCanvasBlendMode = function(modeValue, callback) {
+			this.canvasCalls.canvasGui3d.applyBlendModeSelection(modeValue, callback);
 		};
 
 		CanvasGuiMain.prototype.tickGuiMain = function(tpf) {

@@ -31,6 +31,8 @@ define([
 				resolution:resolution
 			};
 
+			this.blendModes = {};
+
 			this.resolution = resolution;
 		    this.size = 1;
 			this.txScale = 1;
@@ -62,7 +64,7 @@ define([
 
 		CanvasGui3D.prototype.setupParts = function() {
 			this.uiQuad = this.createQuadEntity(this.cameraEntity);
-			this.material = this.createCanvasMaterial(ShaderLib.textured);
+			this.material = this.createCanvasMaterial(ShaderLib.uber);
 		};
 
 		CanvasGui3D.prototype.constructCanvas = function() {
@@ -84,7 +86,9 @@ define([
 			material.blendState.blendEquation = this.materialSettings.blendEquation;
 			material.blendState.blendSrc = this.materialSettings.blendSrc;
 			material.blendState.blendDst = this.materialSettings.blendDst;
-			material.shader.uniforms.color = [1, 1, 1]
+			material.shader.uniforms.color = [1, 1, 1];
+			material.uniforms.materialEmissive = [1, 1, 1, 1];
+			material.uniforms.discardThreshold = 0.1;
 			return material;
 		};
 
@@ -167,25 +171,31 @@ define([
 			this.onFrustumUpdate();
 		};
 
-		CanvasGui3D.prototype.applyBlendModeSelection = function(floatValue) {
+		CanvasGui3D.prototype.applyBlendModeSelection = function(floatValue, callback) {
 
-			
+			var selection = Math.floor(floatValue * this.config.blending.modes.length);
+			this.setBlendModeId(this.config.blending.modes[selection].id);
 
+			callback(this.config.blending.modes[selection].data);
 		};
 
 		CanvasGui3D.prototype.updateBlendMode = function() {
-			var opts = this.config.blending.modes[this.blendModeId];
+			var blendState = this.blendModes[this.blendModeId].blendState;
+			var uniforms = this.blendModes[this.blendModeId].uniforms;
 
 			if (!this.material) {
 				this.materialSettings = {
-					blending : opts['blending'],
-					blendEquation: opts['blendEquation'],
-					blendSrc : opts['blendSrc'],
-					blendDst : opts['blendDst']
+					blending : blendState['blending'],
+					blendEquation: blendState['blendEquation'],
+					blendSrc : blendState['blendSrc'],
+					blendDst : blendState['blendDst']
 				};
 			} else {
-				for (var index in opts) {
-					this.material.blendState[index] = opts[index];
+				for (var index in blendState) {
+					this.material.blendState[index] = blendState[index];
+				};
+				for (var index in uniforms) {
+					this.material.uniforms[index] = uniforms[index];
 				}
 			}
 		};
@@ -209,6 +219,11 @@ define([
 
 		CanvasGui3D.prototype.handleConfigUpdate = function(url, config) {
 			this.config = config;
+
+			for (var i = 0; i < config.blending.modes.length; i++) {
+				this.blendModes[config.blending.modes[i].id] = config.blending.modes[i].data;
+			}
+
 			this.updateBlendMode();
 			this.scaleCanvasGuiResolution(this.txScale)
 		};

@@ -275,8 +275,10 @@ define([
 
 		CanvasCalls.prototype.attenuateGui = function() {
 			this.resolution = this.canvasGui3d.resolution;
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.ctx.fillStyle = this.attenuateColor;
 			this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
 		};
 
 		var t = 0;
@@ -288,8 +290,13 @@ define([
 		//	t = 0;
 			this.canvasGui3d.applyChanges();
 			this.canvasGui3d.updateCanvasGui();
-			UiCallbacks.getCallById('processCallbacks')(tpf);
+
+		//	this.ctx.globalCompositeOperation = 'lighter';
+		//	this.setAttenuateColor([0, 0, 0, 0.2]);
 			this.attenuateGui();
+			this.ctx.globalCompositeOperation = 'source-over';
+			UiCallbacks.getCallById('processCallbacks')(tpf);
+
 			this.drawDepthLayers();
 
 		};
