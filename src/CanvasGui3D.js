@@ -32,6 +32,7 @@ define([
 			};
 
 			this.blendModes = {};
+			this.blendSelection = 0;
 
 			this.resolution = resolution;
 		    this.size = 1;
@@ -172,6 +173,11 @@ define([
 		};
 
 		CanvasGui3D.prototype.applyBlendModeSelection = function(floatValue, callback) {
+			this.blendSelection = floatValue;
+
+			if (!this.config.blending) {
+				return;
+			}
 
 			var selection = Math.floor(floatValue * this.config.blending.modes.length);
 			this.setBlendModeId(this.config.blending.modes[selection].id);
@@ -224,7 +230,7 @@ define([
 				this.blendModes[config.blending.modes[i].id] = config.blending.modes[i].data;
 			}
 
-			this.updateBlendMode();
+			this.applyBlendModeSelection(this.blendSelection, function() {});
 			this.scaleCanvasGuiResolution(this.txScale)
 		};
 
