@@ -11,6 +11,7 @@ define([
 		var height;
 
 		var registerAppContainer = function(element) {
+			element.oncontextmenu = function() { return false; };
 			gameScreen = element;
 			gameScreen.style.pointerEvents = 'auto';
 			width = gameScreen.offsetWidth;

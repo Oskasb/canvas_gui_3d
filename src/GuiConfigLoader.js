@@ -14,12 +14,14 @@ define([
 
 		var GuiConfigLoader = function() {
 			this.registryUrls = {};
-
+		/*
 			var applyOpts = function(srcKey, opts) {
 				ConfigCache.applyDataPipelineOptions(opts);
 			};
 
 			ConfigCache.registerCategoryKeySubscriber('setup', 'pipeline', applyOpts);
+		*/
+			ConfigCache.applyDataPipelineOptions(window.dataPipelineSetup);
 			this.canvasGuiImages = new CanvasGuiImages();
 		};
 
